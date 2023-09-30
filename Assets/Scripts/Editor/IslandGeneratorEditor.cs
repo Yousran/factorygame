@@ -6,8 +6,5 @@ using UnityEditor;
 [CustomEditor(typeof(IslandGen))]
 public class IslandGeneratorEditor : Editor
 {
-    public override void OnInspectorGUI()
-    {
-        IslandGen.RandomSeed = EditorGUILayout.Toggle(false);
-    }
+    
 }

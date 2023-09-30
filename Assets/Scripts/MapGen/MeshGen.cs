@@ -1,15 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 
-public class MeshGen : MonoBehaviour
+public class MeshGen
 {
     List<Vector3> vertices = new List<Vector3>();
     List<int> triangles = new List<int>();
+
+    public GameObject ChunkObject;
     MeshFilter meshFilter;
     MeshCollider MeshCol;
+    MeshRenderer meshRend;
 
-    float[,,] MapData;
+    public static int ChunkSizeX = IslandGen.MapSizeX / 10;
+    public static int ChunkSizeY = IslandGen.MapSizeY;
+    public static int ChunkSizeZ = IslandGen.MapSizeZ / 10;
+
+    Vector3Int ChunkPosition;
+
+    float[,,] MapData = IslandGen.IslandData();
 
     void ClearMeshData()
     {
@@ -28,15 +38,26 @@ public class MeshGen : MonoBehaviour
         MeshCol.sharedMesh = mesh;
     }
     // Start is called before the first frame update
-    void Start()
+    public MeshGen (Vector3Int _Position)
     {
-        meshFilter = gameObject.GetComponent<MeshFilter>();
-        MeshCol = GetComponent<MeshCollider>();
-        MapData = IslandGen.IslandData();
-        transform.tag = "Terrain";
+        ChunkObject = new GameObject();
+        ChunkObject.name = string.Format("Chunk {0}, {1}", _Position.x, _Position.z);
+        ChunkPosition = _Position;
+        ChunkObject.transform.position = ChunkPosition;
+
+        meshFilter = ChunkObject.AddComponent<MeshFilter>();
+        MeshCol = ChunkObject.AddComponent<MeshCollider>();
+        meshRend = ChunkObject.AddComponent<MeshRenderer>();
+        meshRend.material = Resources.Load<Material>("Materials/Tanah");
+
+        ChunkObject.transform.tag = "Terrain";
         ClearMeshData();
-        BuatMeshData();
+        BuatMeshData(_Position);
         BuildMesh();
+    }
+    public void tampilkan()
+    {
+        ChunkObject.SetActive(true);
     }
 
     int GetCubeConfig(float[] cube)
@@ -57,17 +78,20 @@ public class MeshGen : MonoBehaviour
         Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x),Mathf.CeilToInt(Pos.y),Mathf.CeilToInt(Pos.z));
         IslandGen.DataMap[vector3Int.x, vector3Int.y, vector3Int.z] = 0f;
         ClearMeshData();
-        BuatMeshData();
+        vector3Int = ChunkPosition;
+        BuatMeshData(vector3Int);
         BuildMesh();
     }
     public void RemoveTerrain(Vector3 Pos)
     {
         Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x), Mathf.CeilToInt(Pos.y), Mathf.CeilToInt(Pos.z));
+        Debug.Log(vector3Int.ToString());
         MapData[vector3Int.x, vector3Int.y, vector3Int.z] = 1;
         MapData[vector3Int.x+1, vector3Int.y+1, vector3Int.z+1] = 1;
         MapData[vector3Int.x-1, vector3Int.y-1, vector3Int.z - 1] = 1;
         ClearMeshData();
-        BuatMeshData();
+        vector3Int = ChunkPosition;
+        BuatMeshData(vector3Int);
         BuildMesh();
     }
 
@@ -101,20 +125,20 @@ public class MeshGen : MonoBehaviour
         }
     }
 
-    void BuatMeshData()
+    void BuatMeshData(Vector3 Position)
     {
      //Debug.Log(islandGen.MapSizeX);
-            for (int x = 0; x < IslandGen.MapSizeX; x++)
+            for (int x = 0; x < ChunkSizeX; x++)
             {
-                for (int z = 0; z < IslandGen.MapSizeZ; z++)
+                for (int z = 0; z < ChunkSizeZ; z++)
                 {
-                    for (int y = 0; y < IslandGen.MapSizeY; y++)
+                    for (int y = 0; y < ChunkSizeY; y++)
                     {
                         float[] cube = new float[8];
                         for (global::System.Int32 i = 0; i < 8; i++)
                         {
                             Vector3Int corner = new Vector3Int(x, y, z) + IslandGen.CornerTable[i];
-                            cube[i] = MapData[corner.x, corner.y, corner.z];
+                            cube[i] = MapData[corner.x + (int)Position.x, corner.y, corner.z + (int)Position.z];
                         }
                         MarchCube(new Vector3(x, y, z), cube);
                     }

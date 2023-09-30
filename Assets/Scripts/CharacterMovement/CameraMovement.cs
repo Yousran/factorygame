@@ -7,6 +7,8 @@ public class CameraMovement : MonoBehaviour
     public float sensitivity = 2.0f;
     private float rotationX = 0.0f;
     public Camera cam;
+
+    public MapGen Map;
     private void Start()
     {
         cam = this.GetComponent<Camera>();
@@ -26,6 +28,7 @@ public class CameraMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.parent.Rotate(Vector3.up * mouseX * sensitivity);
 
+
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 1f));
@@ -33,7 +36,7 @@ public class CameraMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "Terrain")
                 {
-                    hit.transform.GetComponent<MeshGen>().PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(hit.transform.position).PlaceTerrain(hit.point);
                 }
             }
         }
@@ -45,7 +48,7 @@ public class CameraMovement : MonoBehaviour
             {
                 if (hit.transform.tag == "Terrain")
                 {
-                    hit.transform.GetComponent<MeshGen>().RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(hit.transform.position).RemoveTerrain(hit.point);
                 }
             }
         }

@@ -5,12 +5,11 @@ using Unity.Mathematics;
 
 public static class IslandGen
 {
-    public static int MapSizeX = 100;
-    public static int MapSizeY = 10;
-    public static int MapSizeZ = 100;
+    public static int MapSizeX;
+    public static int MapSizeY;
+    public static int MapSizeZ;
 
     public static string Seed;
-    public static bool RandomSeed = true;
     public static float Scale = 0.7f;
     public static float OffsetX = 0;
     public static float OffsetZ = 0;
@@ -61,10 +60,6 @@ public static class IslandGen
     public static float[,,] IslandData()
     {
         float[,,] Data = new float[MapSizeX + 1,MapSizeY + 1,MapSizeZ + 1];
-        if (RandomSeed)
-        {
-            Seed = (Time.realtimeSinceStartup * 2).ToString();
-        }
 
         for (int x = 0; x < MapSizeX + 1; x++)
         {
