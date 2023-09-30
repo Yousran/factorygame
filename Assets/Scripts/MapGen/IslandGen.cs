@@ -25,6 +25,7 @@ public class IslandGen : MonoBehaviour
     public float OffsetZ3;
 
     public float exponent;
+    public float[,,] DataMap;
 
     //public float Noise(int x, int z)
     //{ 
@@ -114,9 +115,9 @@ public class IslandGen : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        DataMap = IslandData();
     }
 
 }

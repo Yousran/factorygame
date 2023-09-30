@@ -27,18 +27,19 @@ public class MeshGen : MonoBehaviour
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
         meshFilter.mesh = mesh;
+        MeshCol.sharedMesh = mesh;
     }
     // Start is called before the first frame update
     void Start()
     {
         islandGen = GetComponent<IslandGen>();
         meshFilter = gameObject.GetComponent<MeshFilter>();
+        MeshCol = GetComponent<MeshCollider>();
         MapData = islandGen.IslandData();
+        transform.tag = "Terrain";
         ClearMeshData();
         BuatMeshData();
         BuildMesh();
-        MeshCol = GetComponent<MeshCollider>();
-        MeshCol.sharedMesh = meshFilter.sharedMesh;
     }
 
     Vector3Int[] CornerTable = new Vector3Int[8] {
@@ -345,6 +346,25 @@ public class MeshGen : MonoBehaviour
         return ConfigIndex;
     }
 
+    public void PlaceTerrain(Vector3 Pos)
+    {
+        Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x),Mathf.CeilToInt(Pos.y),Mathf.CeilToInt(Pos.z));
+        islandGen.DataMap[vector3Int.x, vector3Int.y, vector3Int.z] = 0f;
+        ClearMeshData();
+        BuatMeshData();
+        BuildMesh();
+    }
+    public void RemoveTerrain(Vector3 Pos)
+    {
+        Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x), Mathf.CeilToInt(Pos.y), Mathf.CeilToInt(Pos.z));
+        islandGen.DataMap[vector3Int.x, vector3Int.y, vector3Int.z] = 1;
+        islandGen.DataMap[vector3Int.x+1, vector3Int.y+1, vector3Int.z+1] = 1;
+        islandGen.DataMap[vector3Int.x-1, vector3Int.y-1, vector3Int.z - 1] = 1;
+        ClearMeshData();
+        BuatMeshData();
+        BuildMesh();
+    }
+
     void MarchCube(Vector3 Position, float[] Cube)
     {
         int ConfigIndex = GetCubeConfig(Cube);
@@ -388,7 +408,7 @@ public class MeshGen : MonoBehaviour
                         for (global::System.Int32 i = 0; i < 8; i++)
                         {
                             Vector3Int corner = new Vector3Int(x, y, z) + CornerTable[i];
-                            cube[i] = MapData[corner.x, corner.y, corner.z];
+                            cube[i] = islandGen.DataMap[corner.x, corner.y, corner.z];
                         }
                         MarchCube(new Vector3(x, y, z), cube);
                     }

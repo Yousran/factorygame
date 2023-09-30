@@ -56,7 +56,7 @@ public class CharacterMovement : MonoBehaviour
     {
         Debug.Log("isgrounded");
         RaycastHit hit;
-        bool grounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f);
+        bool grounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
         Debug.Log(grounded);
         return grounded;
     }
