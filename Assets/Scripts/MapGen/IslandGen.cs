@@ -7,6 +7,7 @@ public class IslandGen : MonoBehaviour
 {
     public GameObject kubus;
     public int MapSizeX;
+    public int MapSizeY;
     public int MapSizeZ;
 
     public string Seed;
@@ -18,6 +19,10 @@ public class IslandGen : MonoBehaviour
     public float Scale2 = 1;
     public float OffsetX2;
     public float OffsetZ2;
+
+    public float Scale3 = 1;
+    public float OffsetX3;
+    public float OffsetZ3;
 
     public float exponent;
 
@@ -38,14 +43,19 @@ public class IslandGen : MonoBehaviour
         float FallX = (float)(x / (Scale * MapSizeX) + OffsetX);
         float FallZ = (float)(z / (Scale * MapSizeZ) + OffsetZ);
 
-        float FallX2 = (float)(x / (Scale * MapSizeX) + OffsetX2);
-        float FallZ2 = (float)(z / (Scale * MapSizeZ) + OffsetZ2);
+        float FallX2 = (float)(x / (Scale2 * MapSizeX) + OffsetX2);
+        float FallZ2 = (float)(z / (Scale2 * MapSizeZ) + OffsetZ2);
+
+        float FallX3 = (float)(x / (Scale3 * MapSizeX) + OffsetX3);
+        float FallZ3 = (float)(z / (Scale3 * MapSizeZ) + OffsetZ3);
 
         float value1 = noise.snoise(new float2(FallX, FallZ)) * (float)SeededRandom.NextDouble();
         float value2 = noise.snoise(new float2(FallX2, FallZ2)) * (float)SeededRandom.NextDouble();
+        float value3 = noise.snoise(new float2(FallX3, FallZ3)) * (float)SeededRandom.NextDouble();
         e += Mathf.Lerp(1,0,value1);
         e *= Mathf.Lerp(1, 0, value2);
-        return (e - FallofMap(x,z))*10;
+        e *= Mathf.Lerp(1, 0, value3);
+        return (e - FallofMap(x,z));
     }
 
     public float FallofMap(int x, int z)
@@ -61,18 +71,22 @@ public class IslandGen : MonoBehaviour
     {
         if (RandomSeed)
         {
-            Seed = Time.realtimeSinceStartup.ToString();
+            Seed = (Time.realtimeSinceStartup * 2).ToString();
         }
         
         for (int x = 0; x < MapSizeX + 1; x++)
         {
             for (int z = 0; z < MapSizeZ + 1; z++)
             {
-
-                GameObject InstanKubus = Instantiate(kubus,new Vector3(x, Noise(x, z), z),Quaternion.identity);
-                MeshRenderer rend = InstanKubus.GetComponent<MeshRenderer>();
-                rend.material.color = Color.Lerp(Color.black,Color.white, Noise(x, z));
-
+                for (int y = 0; y < MapSizeY + 1; y++)
+                {
+                    if (y < MapSizeY * Noise(x,z))
+                    { 
+                        GameObject InstanKubus = Instantiate(kubus, new Vector3(x, y, z), Quaternion.identity);
+                        MeshRenderer rend = InstanKubus.GetComponent<MeshRenderer>();
+                        rend.material.color = Color.Lerp(Color.black, Color.white, Noise(x, z));
+                    }
+                }
             }
         }
     }
