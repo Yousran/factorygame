@@ -24,8 +24,8 @@ public class MeshGen : MonoBehaviour
         Mesh mesh = new Mesh();
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
-        mesh.RecalculateNormals();
         meshFilter.mesh = mesh;
+        mesh.RecalculateNormals();
     }
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,8 @@ public class MeshGen : MonoBehaviour
         ClearMeshData();
         BuatMeshData();
         BuildMesh();
+        MeshCol = GetComponent<MeshCollider>();
+        MeshCol.sharedMesh = meshFilter.sharedMesh;
     }
 
     Vector3Int[] CornerTable = new Vector3Int[8] {
