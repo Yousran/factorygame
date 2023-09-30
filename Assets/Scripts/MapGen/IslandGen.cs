@@ -67,28 +67,50 @@ public class IslandGen : MonoBehaviour
         return Distance;
     }
     // Start is called before the first frame update
-    void Start()
+    //id Start()
+    //
+    //  float[,,] Data = IslandData();
+    //  for (int x = 0; x < MapSizeX; x++)
+    //  {
+    //      for (int z = 0; z < MapSizeZ; z++)
+    //      {
+    //          for (int y = 0; y < MapSizeY; y++)
+    //          {
+    //              if (Data[x,y,z] == 1)
+    //              { 
+    //                  GameObject InstanKubus = Instantiate(kubus, new Vector3(x, y, z), Quaternion.identity);
+    //              }
+    //          }
+   //       }
+   //   }
+  //}
+
+    public float[,,] IslandData()
     {
+        float[,,] Data = new float[MapSizeX + 1,MapSizeY + 1,MapSizeZ + 1];
         if (RandomSeed)
         {
             Seed = (Time.realtimeSinceStartup * 2).ToString();
         }
-        
+
         for (int x = 0; x < MapSizeX + 1; x++)
         {
             for (int z = 0; z < MapSizeZ + 1; z++)
             {
                 for (int y = 0; y < MapSizeY + 1; y++)
                 {
-                    if (y < MapSizeY * Noise(x,z))
-                    { 
-                        GameObject InstanKubus = Instantiate(kubus, new Vector3(x, y, z), Quaternion.identity);
-                        MeshRenderer rend = InstanKubus.GetComponent<MeshRenderer>();
-                        rend.material.color = Color.Lerp(Color.black, Color.white, Noise(x, z));
+                    if (y < MapSizeY * Noise(x, z))
+                    {
+                        Data[x, y, z] = 0;
+                    }
+                    else
+                    {
+                        Data[x, y, z] = 1;
                     }
                 }
             }
         }
+        return Data;
     }
 
     // Update is called once per frame
