@@ -22,10 +22,11 @@ public class MeshGen : MonoBehaviour
     void BuildMesh()
     {
         Mesh mesh = new Mesh();
+        mesh.Clear();
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
-        meshFilter.mesh = mesh;
         mesh.RecalculateNormals();
+        meshFilter.mesh = mesh;
     }
     // Start is called before the first frame update
     void Start()
