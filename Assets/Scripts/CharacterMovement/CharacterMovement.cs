@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
     public float runSpeed = 10.0f;
     public float jumpForce = 10.0f;
     private bool isRunning = false;
+    RaycastHit hit;
 
     private Rigidbody rb;
 
@@ -45,19 +46,11 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         // Lompat
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKey(KeyCode.Space) && Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce/10, ForceMode.Impulse);
         }
         
     }
 
-    private bool IsGrounded()
-    {
-        Debug.Log("isgrounded");
-        RaycastHit hit;
-        bool grounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
-        Debug.Log(grounded);
-        return grounded;
-    }
 }
