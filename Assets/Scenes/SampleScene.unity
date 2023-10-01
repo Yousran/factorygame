@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -349,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 5338088238173251007, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
+      propertyPath: SphereRadius
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8952325505975571277, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
       propertyPath: Map
       value: 
@@ -412,11 +416,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: SizeY
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: SizeZ
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: ChunkSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: m_Enabled

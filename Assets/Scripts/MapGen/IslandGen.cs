@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using System;
+using Unity.Collections;
+using Unity.Jobs;
 
 public static class IslandGen
 {
@@ -10,7 +13,7 @@ public static class IslandGen
     public static int MapSizeZ;
 
     public static string Seed;
-    public static float Scale = 0.7f;
+    public static float Scale = 1f;
     public static float OffsetX = 0;
     public static float OffsetZ = 0;
 
@@ -18,15 +21,60 @@ public static class IslandGen
     public static float OffsetX2 = 5f;
     public static float OffsetZ2 = 5f;
 
-    public static float Scale3 = 0.5f;
+    public static float Scale3 = 0.1f;
     public static float OffsetX3=3;
     public static float OffsetZ3=3;
 
-    public static float exponent=2;
+    public static float exponent1 = 2;
+    public static float exponent2 = 8;
+    public static float exponent3 = 8;
+
+    public static float BatasTinggi3 = 0.3f;
+    public static float BatasTinggi4 = 0.1f;
+    public static float BVar1 = 1.15f;
+    public static float BVar2 = 2.2f;
     public static float[,,] DataMap;
 
+    public struct MeshGenJob : IJob
+    {
+        public Vector3Int ChunkPosition;
+        public NativeArray<float> MapData;
 
-    public static float Noise(int x,int z)
+        public void Initialize(Vector3Int _Position, float[,,] _MapData)
+        {
+            ChunkPosition = _Position;
+            int width = _MapData.GetLength(0);
+            int height = _MapData.GetLength(1);
+            int depth = _MapData.GetLength(2);
+
+            int totalElements = width * height * depth;
+
+            // Mengubah array 3D menjadi flat array
+            float[] flatMapData = new float[totalElements];
+
+            int index = 0;
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    for (int z = 0; z < depth; z++)
+                    {
+                        flatMapData[index] = _MapData[x, y, z];
+                        index++;
+                    }
+                }
+            }
+
+            // Inisialisasi NativeArray dengan flat array
+            MapData = new NativeArray<float>(flatMapData, Allocator.Persistent);
+        }
+
+        public void Execute()
+        {
+            IslandData();
+        }
+    }
+    public static float Noise(int x, int z)
     {
         System.Random SeededRandom = new System.Random(Seed.GetHashCode());
         float e = 0;
@@ -42,19 +90,23 @@ public static class IslandGen
         float value1 = noise.snoise(new float2(FallX, FallZ)) * (float)SeededRandom.NextDouble();
         float value2 = noise.snoise(new float2(FallX2, FallZ2)) * (float)SeededRandom.NextDouble();
         float value3 = noise.snoise(new float2(FallX3, FallZ3)) * (float)SeededRandom.NextDouble();
-        e += Mathf.Lerp(1, 0,value1);
-        e *= Mathf.Lerp(1, 0, value2);
-        e *= Mathf.Lerp(1, 0, value3);
-        return (e - FallofMap(x,z));
+        e += Mathf.Lerp(1, 0, value1);
+        e += Mathf.Lerp(1, 0, value2);
+        e += Mathf.Lerp(1, 0, value3);
+        e /= 3;
+        return e - Mathf.Lerp(1, 0, FallofMap(x, z));
     }
 
     public static float FallofMap(int x, int z)
     {
-        float FallX = (float)2 * x / MapSizeX - 1f;
-        float FallZ = (float)2 * z / MapSizeZ - 1f;
+        float FallX = x / (float)MapSizeX * 2 - 1;
+        float FallZ = z / (float)MapSizeZ * 2 - 1;
 
-        float Distance = 1f - (1f - Mathf.Pow(FallX, exponent)) * (1f - Mathf.Pow(FallZ, exponent));
-        return Distance;
+        float Distance = Mathf.Max(MathF.Abs(FallX), MathF.Abs(FallZ));
+        float Distance2 = Mathf.Lerp(BatasTinggi3, 0, 1f - (1f - Mathf.Pow(FallX, exponent1)) * (1f - Mathf.Pow(FallZ, exponent1)));
+        float Distance3 = Mathf.Pow(BVar1 - Distance, exponent2);
+        float Distance4 = Mathf.Lerp(BatasTinggi4, 0, Mathf.Pow(BVar2 - Distance, exponent2));
+        return (Distance2 + Distance3 + Distance4) / 3;
     }
 
     public static float[,,] IslandData()

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEditor.Search;
 using UnityEngine;
+using static IslandGen;
 
 public class MeshGen
 {
@@ -13,13 +16,16 @@ public class MeshGen
     MeshCollider MeshCol;
     MeshRenderer meshRend;
 
-    public static int ChunkSizeX = IslandGen.MapSizeX / 10;
+    public static int ChunkSizeX = IslandGen.MapSizeX / 50;
     public static int ChunkSizeY = IslandGen.MapSizeY;
-    public static int ChunkSizeZ = IslandGen.MapSizeZ / 10;
+    public static int ChunkSizeZ = IslandGen.MapSizeZ / 50;
 
     Vector3Int ChunkPosition;
 
     float[,,] MapData = IslandGen.IslandData();
+
+    private JobHandle meshGenJobHandle;
+    private bool jobCompleted = false;
 
     void ClearMeshData()
     {
@@ -27,7 +33,7 @@ public class MeshGen
         triangles.Clear();
     }
 
-    void BuildMesh()
+    public void BuildMesh()
     {
         Mesh mesh = new Mesh();
         mesh.Clear();
@@ -93,9 +99,12 @@ public class MeshGen
         BuildMesh();
     }
 
-    void MarchCube(Vector3 Position, float[] Cube)
+    void MarchCube(Vector3 Position, NativeArray<float> Cube)
     {
-        int ConfigIndex = GetCubeConfig(Cube);
+        // Mengonversi NativeArray<float> menjadi float[]
+        float[] cubeDataArray = new float[Cube.Length];
+        Cube.CopyTo(cubeDataArray);
+        int ConfigIndex = GetCubeConfig(cubeDataArray);
       //Debug.Log(ConfigIndex);
         if (ConfigIndex == 0 || ConfigIndex == 255)
         {
@@ -122,6 +131,16 @@ public class MeshGen
             }
         }
     }
+    public void GenerateMeshAsync()
+    {
+        MeshGenJob job = new MeshGenJob();
+        job.Initialize(ChunkPosition, MapData);
+        meshGenJobHandle = job.Schedule();
+    }
+    public bool IsJobCompleted()
+    {
+        return meshGenJobHandle.IsCompleted;
+    }
 
     void BuatMeshData(Vector3 Position)
     {
@@ -138,7 +157,9 @@ public class MeshGen
                             Vector3Int corner = new Vector3Int(x, y, z) + IslandGen.CornerTable[i];
                             cube[i] = MapData[corner.x + (int)Position.x, corner.y, corner.z + (int)Position.z];
                         }
-                        MarchCube(new Vector3(x, y, z), cube);
+                    NativeArray<float> cubeData = new NativeArray<float>(cube, Allocator.Temp);
+                    MarchCube(new Vector3(x, y, z), cubeData);
+                    cubeData.Dispose(); // Jangan lupa untuk membebaskan NativeArray setelah selesai menggunakannya
                     }
                 }
             }
