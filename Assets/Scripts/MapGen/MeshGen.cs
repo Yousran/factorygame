@@ -48,7 +48,7 @@ public class MeshGen
         meshFilter = ChunkObject.AddComponent<MeshFilter>();
         MeshCol = ChunkObject.AddComponent<MeshCollider>();
         meshRend = ChunkObject.AddComponent<MeshRenderer>();
-        meshRend.material = Resources.Load<Material>("Materials/Tanah");
+        meshRend.material = Resources.Load<Material>("Materials/TerrainMaterial");
 
         ChunkObject.transform.tag = "Terrain";
         ChunkObject.layer = 6;

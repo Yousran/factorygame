@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     public float runSpeed = 10.0f;
     public float jumpForce = 10.0f;
     private bool isRunning = false;
+    public float SkalaGravitasi = 5;
     public LayerMask mask;
     public float SphereRadius;
     RaycastHit hit;
@@ -26,6 +27,8 @@ public class CharacterMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         float mouseX = Input.GetAxis("Mouse X");
+
+        rb.AddForce(Physics.gravity * (SkalaGravitasi - 1) * rb.mass);
 
         // Mengatur rotasi karakter berdasarkan input mouse X
         transform.Rotate(Vector3.up * mouseX);
