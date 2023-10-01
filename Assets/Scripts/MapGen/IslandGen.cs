@@ -42,7 +42,7 @@ public static class IslandGen
         float value1 = noise.snoise(new float2(FallX, FallZ)) * (float)SeededRandom.NextDouble();
         float value2 = noise.snoise(new float2(FallX2, FallZ2)) * (float)SeededRandom.NextDouble();
         float value3 = noise.snoise(new float2(FallX3, FallZ3)) * (float)SeededRandom.NextDouble();
-        e += Mathf.Lerp(1,0,value1);
+        e += Mathf.Lerp(1, 0,value1);
         e *= Mathf.Lerp(1, 0, value2);
         e *= Mathf.Lerp(1, 0, value3);
         return (e - FallofMap(x,z));
@@ -53,7 +53,7 @@ public static class IslandGen
         float FallX = (float)2 * x / MapSizeX - 1f;
         float FallZ = (float)2 * z / MapSizeZ - 1f;
 
-        float Distance = 1f - (1f - Mathf.Pow(FallX,exponent)) * (1f - Mathf.Pow(FallZ,exponent));
+        float Distance = 1f - (1f - Mathf.Pow(FallX, exponent)) * (1f - Mathf.Pow(FallZ, exponent));
         return Distance;
     }
 
@@ -67,13 +67,17 @@ public static class IslandGen
             {
                 for (int y = 0; y < MapSizeY + 1; y++)
                 {
-                    if (y < MapSizeY * Noise(x, z))
+                    if (y < MapSizeY * Noise(x, z) )
                     {
                         Data[x, y, z] = 0;
                     }
                     else
                     {
                         Data[x, y, z] = 1;
+                    }
+                    if (y == 0)
+                    {
+                        Data[x, y, z] = 0;
                     }
                 }
             }

@@ -46,6 +46,12 @@ public class MapGen : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x + SizeX / 2, transform.position.y + SizeY / 2, transform.position.z + SizeZ / 2), new Vector3(SizeX, SizeY, SizeZ));
+    }
+
     public MeshGen GetChunkFromV3(Vector3 pos)
     {
         int x = (int)pos.x;

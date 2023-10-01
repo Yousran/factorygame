@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6923101714641000100
+--- !u!114 &-3664355504002416976
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TerrainMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: c1c2fbb0ff95f5240b63373cf1e16b9b, type: 3}
+  m_Name: SeaMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: af5e82f2f2cbb7e4ab8201e825057ffa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -40,13 +40,12 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _GrassHeight: 0
-    - _SandHeight: 2
-    - _SandTreshold: 0
-    - _StoneHeight: 5
+    - _Depth_Fade: 1.24
+    - _Foam_Depth: 1.22
+    - _Foam_Speed: 0.1
+    - _Water_Noise_Scale: 7.32
     m_Colors:
-    - _DirtColor: {r: 0.4433962, g: 0.3305645, b: 0.1815415, a: 1}
-    - _GrassColor: {r: 0.1627625, g: 0.6792453, b: 0.3505744, a: 1}
-    - _SandColor: {r: 0.8301887, g: 0.7249793, b: 0.5043788, a: 1}
-    - _StoneColor: {r: 0.3113208, g: 0.3113208, b: 0.3113208, a: 1}
+    - _Depth_Color: {r: 0.2264151, g: 0.53333336, b: 0.5660378, a: 1}
+    - _Foam_Color: {r: 0.54339623, g: 0.6037736, b: 0.60130584, a: 1}
+    - _Water_Color: {r: 0.04784616, g: 0.7207499, b: 0.7924528, a: 1}
   m_BuildTextureStacks: []

@@ -104,6 +104,6 @@ public class CharacterMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, SphereRadius);
+        Gizmos.DrawWireSphere(transform.position, SphereRadius);
     }
 }
