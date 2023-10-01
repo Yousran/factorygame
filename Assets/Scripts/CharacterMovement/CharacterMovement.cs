@@ -69,9 +69,6 @@ public class CharacterMovement : MonoBehaviour
         {
             GameObject hitObject = collider.gameObject;
 
-            // Now, you can work with the hitObject
-            Debug.Log("Found object: " + hitObject.name);
-
             // Enable MeshRenderer
             MeshRenderer meshRenderer = hitObject.GetComponent<MeshRenderer>();
             if (meshRenderer != null)

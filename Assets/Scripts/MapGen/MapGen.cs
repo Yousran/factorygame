@@ -1,12 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Unity.Jobs;
-using Unity.Collections;
-using Unity.Mathematics;
-using System.Threading;
 
-using static IslandGen;
 public class MapGen : MonoBehaviour
 {
     public string Seed;
@@ -16,10 +12,7 @@ public class MapGen : MonoBehaviour
     public int SizeZ = 10;
     public int ChunkSize = 0;
 
-    Dictionary<Vector3Int,MeshGen> Chunks = new Dictionary<Vector3Int,MeshGen>();
-
-    private JobHandle generateJobHandle;
-    private bool jobCompleted = false;
+    Dictionary<Vector3Int, MeshGen> Chunks = new Dictionary<Vector3Int, MeshGen>();
     // Start is called before the first frame update
     void Start()
     {
@@ -36,33 +29,21 @@ public class MapGen : MonoBehaviour
         }
         //MeshGen.ChunkSizeX = IslandGen.MapSizeX / ChunkSize;
         //MeshGen.ChunkSizeZ = IslandGen.MapSizeZ / ChunkSize;
-        GenerateChunk();    
+        GenerateChunk();
     }
 
 
     void GenerateChunk()
     {
-        foreach (var chunkPos in Chunks.Keys)
+        for (int x = 0; x < ChunkSize; x++)
         {
-            MeshGenJob job = new MeshGenJob();
-            job.Initialize(chunkPos, IslandGen.IslandData());
-            generateJobHandle = job.Schedule(generateJobHandle);
+            for (int z = 0; z < ChunkSize; z++)
+            {
+                Vector3Int Chunkpos = new Vector3Int(x * IslandGen.MapSizeX / ChunkSize, 0, z * IslandGen.MapSizeZ / ChunkSize);
+                Chunks.Add(Chunkpos, new MeshGen(Chunkpos));
+                Chunks[Chunkpos].ChunkObject.transform.SetParent(transform);
+            }
         }
-
-        StartCoroutine(WaitForJob());
-    }
-    IEnumerator WaitForJob()
-    {
-        yield return new WaitUntil(() => generateJobHandle.IsCompleted);
-
-        generateJobHandle.Complete();
-
-        foreach (var chunkPos in Chunks.Keys)
-        {
-            Chunks[chunkPos].BuildMesh();
-        }
-
-        jobCompleted = true;
     }
 
     private void OnDrawGizmos()

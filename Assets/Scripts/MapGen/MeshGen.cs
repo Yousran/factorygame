@@ -1,31 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
-using Unity.Jobs;
 using UnityEditor.Search;
 using UnityEngine;
-using static IslandGen;
+using Unity.Jobs;
+using Unity.Collections;
+using System;
 
-public class MeshGen
+public class MeshGen : IDisposable
 {
-    List<Vector3> vertices = new List<Vector3>();
-    List<int> triangles = new List<int>();
-
+    NativeList<Vector3> vertices;
+    NativeList<int> triangles;
     public GameObject ChunkObject;
     MeshFilter meshFilter;
     MeshCollider MeshCol;
     MeshRenderer meshRend;
-
-    public static int ChunkSizeX = IslandGen.MapSizeX / 50;
+    public static int ChunkSizeX = IslandGen.MapSizeX / 10;
     public static int ChunkSizeY = IslandGen.MapSizeY;
-    public static int ChunkSizeZ = IslandGen.MapSizeZ / 50;
-
+    public static int ChunkSizeZ = IslandGen.MapSizeZ / 10;
     Vector3Int ChunkPosition;
 
     float[,,] MapData = IslandGen.IslandData();
-
-    private JobHandle meshGenJobHandle;
-    private bool jobCompleted = false;
 
     void ClearMeshData()
     {
@@ -33,34 +27,38 @@ public class MeshGen
         triangles.Clear();
     }
 
-    public void BuildMesh()
+    void BuildMesh()
     {
         Mesh mesh = new Mesh();
         mesh.Clear();
-        mesh.vertices = vertices.ToArray();
-        mesh.triangles = triangles.ToArray();
+        mesh.vertices = vertices.ToArray(Allocator.Persistent).ToArray();
+        mesh.triangles = triangles.ToArray(Allocator.Persistent).ToArray();
         mesh.RecalculateNormals();
         meshFilter.mesh = mesh;
         MeshCol.sharedMesh = mesh;
+
     }
+
     // Start is called before the first frame update
-    public MeshGen (Vector3Int _Position)
+    public MeshGen(Vector3Int _Position)
     {
         ChunkObject = new GameObject();
         ChunkObject.name = string.Format("Chunk {0}, {1}", _Position.x, _Position.z);
         ChunkPosition = _Position;
         ChunkObject.transform.position = ChunkPosition;
-
         meshFilter = ChunkObject.AddComponent<MeshFilter>();
         MeshCol = ChunkObject.AddComponent<MeshCollider>();
         meshRend = ChunkObject.AddComponent<MeshRenderer>();
         meshRend.material = Resources.Load<Material>("Materials/TerrainMaterial");
-
         ChunkObject.transform.tag = "Terrain";
         ChunkObject.layer = 6;
-        ClearMeshData();
+
+        vertices = new NativeList<Vector3>(Allocator.Persistent);
+        triangles = new NativeList<int>(Allocator.Persistent);
+
         BuatMeshData(_Position);
         BuildMesh();
+
         ChunkObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
@@ -99,13 +97,11 @@ public class MeshGen
         BuildMesh();
     }
 
-    void MarchCube(Vector3 Position, NativeArray<float> Cube)
+
+    void MarchCube(Vector3 Position, float[] Cube)
     {
-        // Mengonversi NativeArray<float> menjadi float[]
-        float[] cubeDataArray = new float[Cube.Length];
-        Cube.CopyTo(cubeDataArray);
-        int ConfigIndex = GetCubeConfig(cubeDataArray);
-      //Debug.Log(ConfigIndex);
+        int ConfigIndex = GetCubeConfig(Cube);
+        //Debug.Log(ConfigIndex);
         if (ConfigIndex == 0 || ConfigIndex == 255)
         {
             return;
@@ -126,43 +122,39 @@ public class MeshGen
                 Vector3 finalvert = (vert1 + vert2) / 2f;
 
                 vertices.Add(finalvert);
-                triangles.Add(vertices.Count - 1);
+                triangles.Add(vertices.Length - 1);
                 EdgeIndex++;
             }
         }
     }
-    public void GenerateMeshAsync()
-    {
-        MeshGenJob job = new MeshGenJob();
-        job.Initialize(ChunkPosition, MapData);
-        meshGenJobHandle = job.Schedule();
-    }
-    public bool IsJobCompleted()
-    {
-        return meshGenJobHandle.IsCompleted;
-    }
 
     void BuatMeshData(Vector3 Position)
     {
-     //Debug.Log(islandGen.MapSizeX);
-            for (int x = 0; x < ChunkSizeX; x++)
+        for (int x = 0; x < ChunkSizeX; x++)
+        {
+            for (int z = 0; z < ChunkSizeZ; z++)
             {
-                for (int z = 0; z < ChunkSizeZ; z++)
+                for (int y = 0; y < ChunkSizeY; y++)
                 {
-                    for (int y = 0; y < ChunkSizeY; y++)
+                    float[] cube = new float[8];
+                    for (int i = 0; i < 8; i++)
                     {
-                        float[] cube = new float[8];
-                        for (global::System.Int32 i = 0; i < 8; i++)
-                        {
-                            Vector3Int corner = new Vector3Int(x, y, z) + IslandGen.CornerTable[i];
-                            cube[i] = MapData[corner.x + (int)Position.x, corner.y, corner.z + (int)Position.z];
-                        }
-                    NativeArray<float> cubeData = new NativeArray<float>(cube, Allocator.Temp);
-                    MarchCube(new Vector3(x, y, z), cubeData);
-                    cubeData.Dispose(); // Jangan lupa untuk membebaskan NativeArray setelah selesai menggunakannya
+                        Vector3Int corner = new Vector3Int(x, y, z) + IslandGen.CornerTable[i];
+                        cube[i] = MapData[corner.x + (int)Position.x, corner.y, corner.z + (int)Position.z];
                     }
+                    MarchCube(new Vector3(x, y, z), cube);
                 }
             }
-        
+        }
+
     }
+    public void Dispose()
+    {
+        if (vertices.IsCreated)
+            vertices.Dispose();
+
+        if (triangles.IsCreated)
+            triangles.Dispose();
+    }
+
 }

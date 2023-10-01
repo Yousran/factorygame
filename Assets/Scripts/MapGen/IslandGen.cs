@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using System;
-using Unity.Collections;
-using Unity.Jobs;
 
 public static class IslandGen
 {
@@ -22,8 +20,8 @@ public static class IslandGen
     public static float OffsetZ2 = 5f;
 
     public static float Scale3 = 0.1f;
-    public static float OffsetX3=3;
-    public static float OffsetZ3=3;
+    public static float OffsetX3 = 3;
+    public static float OffsetZ3 = 3;
 
     public static float exponent1 = 2;
     public static float exponent2 = 8;
@@ -35,45 +33,7 @@ public static class IslandGen
     public static float BVar2 = 2.2f;
     public static float[,,] DataMap;
 
-    public struct MeshGenJob : IJob
-    {
-        public Vector3Int ChunkPosition;
-        public NativeArray<float> MapData;
 
-        public void Initialize(Vector3Int _Position, float[,,] _MapData)
-        {
-            ChunkPosition = _Position;
-            int width = _MapData.GetLength(0);
-            int height = _MapData.GetLength(1);
-            int depth = _MapData.GetLength(2);
-
-            int totalElements = width * height * depth;
-
-            // Mengubah array 3D menjadi flat array
-            float[] flatMapData = new float[totalElements];
-
-            int index = 0;
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    for (int z = 0; z < depth; z++)
-                    {
-                        flatMapData[index] = _MapData[x, y, z];
-                        index++;
-                    }
-                }
-            }
-
-            // Inisialisasi NativeArray dengan flat array
-            MapData = new NativeArray<float>(flatMapData, Allocator.Persistent);
-        }
-
-        public void Execute()
-        {
-            IslandData();
-        }
-    }
     public static float Noise(int x, int z)
     {
         System.Random SeededRandom = new System.Random(Seed.GetHashCode());
@@ -111,7 +71,7 @@ public static class IslandGen
 
     public static float[,,] IslandData()
     {
-        float[,,] Data = new float[MapSizeX + 1,MapSizeY + 1,MapSizeZ + 1];
+        float[,,] Data = new float[MapSizeX + 1, MapSizeY + 1, MapSizeZ + 1];
 
         for (int x = 0; x < MapSizeX + 1; x++)
         {
@@ -119,7 +79,7 @@ public static class IslandGen
             {
                 for (int y = 0; y < MapSizeY + 1; y++)
                 {
-                    if (y < MapSizeY * Noise(x, z) )
+                    if (y < MapSizeY * Noise(x, z))
                     {
                         Data[x, y, z] = 0;
                     }
