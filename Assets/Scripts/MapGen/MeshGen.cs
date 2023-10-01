@@ -51,13 +51,11 @@ public class MeshGen
         meshRend.material = Resources.Load<Material>("Materials/Tanah");
 
         ChunkObject.transform.tag = "Terrain";
+        ChunkObject.layer = 6;
         ClearMeshData();
         BuatMeshData(_Position);
         BuildMesh();
-    }
-    public void tampilkan()
-    {
-        ChunkObject.SetActive(true);
+        ChunkObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     int GetCubeConfig(float[] cube)
@@ -76,7 +74,7 @@ public class MeshGen
     public void PlaceTerrain(Vector3 Pos)
     {
         Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x),Mathf.CeilToInt(Pos.y),Mathf.CeilToInt(Pos.z));
-        IslandGen.DataMap[vector3Int.x, vector3Int.y, vector3Int.z] = 0f;
+        MapData[vector3Int.x, vector3Int.y, vector3Int.z] = 0f;
         ClearMeshData();
         vector3Int = ChunkPosition;
         BuatMeshData(vector3Int);

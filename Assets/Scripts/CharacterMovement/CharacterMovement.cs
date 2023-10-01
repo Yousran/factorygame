@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -7,10 +8,13 @@ public class CharacterMovement : MonoBehaviour
     public float runSpeed = 10.0f;
     public float jumpForce = 10.0f;
     private bool isRunning = false;
+    public LayerMask mask;
+    public float SphereRadius;
     RaycastHit hit;
 
     private Rigidbody rb;
 
+    private HashSet<GameObject> objectsInSphere = new HashSet<GameObject>();
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,7 +54,53 @@ public class CharacterMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce/10, ForceMode.Impulse);
         }
-        
-    }
 
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, SphereRadius, mask);
+
+        // Create a HashSet of GameObjects in the current frame
+        HashSet<GameObject> currentFrameObjects = new HashSet<GameObject>();
+
+        // Loop through the colliders to find the game objects
+        foreach (Collider collider in colliders)
+        {
+            GameObject hitObject = collider.gameObject;
+
+            // Now, you can work with the hitObject
+            Debug.Log("Found object: " + hitObject.name);
+
+            // Enable MeshRenderer
+            MeshRenderer meshRenderer = hitObject.GetComponent<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                meshRenderer.enabled = true;
+            }
+
+            // Add the GameObject to the HashSet for the current frame
+            currentFrameObjects.Add(hitObject);
+        }
+
+        // Loop through the objects that were in the previous frame but not in the current frame
+        foreach (GameObject previousFrameObject in objectsInSphere)
+        {
+            if (!currentFrameObjects.Contains(previousFrameObject))
+            {
+                // Disable MeshRenderer for objects that are no longer in the sphere
+                MeshRenderer meshRenderer = previousFrameObject.GetComponent<MeshRenderer>();
+                if (meshRenderer != null)
+                {
+                    meshRenderer.enabled = false;
+                }
+            }
+        }
+
+        // Update the HashSet of objects for the current frame
+        objectsInSphere = currentFrameObjects;
+
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, SphereRadius);
+    }
 }
