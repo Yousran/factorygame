@@ -42,6 +42,7 @@ public class MapGen : MonoBehaviour
                 Vector3Int Chunkpos = new Vector3Int(x * IslandGen.MapSizeX / ChunkSize, 0, z * IslandGen.MapSizeZ / ChunkSize);
                 Chunks.Add(Chunkpos, new MeshGen(Chunkpos));
                 Chunks[Chunkpos].ChunkObject.transform.SetParent(transform);
+                Debug.Log("loaded");
             }
         }
     }

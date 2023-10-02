@@ -56,7 +56,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
-  SphereRadius: 10
+  SphereRadius: 40
 --- !u!33 &8609367601768885202
 MeshFilter:
   m_ObjectHideFlags: 0

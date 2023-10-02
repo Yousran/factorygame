@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: b1b079d053c3d0c41952dadf32a89ffd, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -47,6 +47,6 @@ MonoBehaviour:
   Seed: 
   RandomSeed: 1
   SizeX: 100
-  SizeY: 10
+  SizeY: 20
   SizeZ: 100
   ChunkSize: 10
