@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6923101714641000100
+--- !u!114 &-1974785059198655961
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TerrainMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: c1c2fbb0ff95f5240b63373cf1e16b9b, type: 3}
+  m_Name: TestMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: f06424cac7ba6a64cbea614388e0e930, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -40,13 +40,5 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _GrassHeight: 0
-    - _SandHeight: 2
-    - _SandTreshold: 0
-    - _StoneHeight: 14
-    m_Colors:
-    - _DirtColor: {r: 0.4433962, g: 0.3305645, b: 0.1815415, a: 1}
-    - _GrassColor: {r: 0.1627625, g: 0.6792453, b: 0.3505744, a: 1}
-    - _SandColor: {r: 0.8396226, g: 0.7633523, b: 0.60516196, a: 1}
-    - _StoneColor: {r: 0.3113208, g: 0.3113208, b: 0.3113208, a: 1}
+    m_Colors: []
   m_BuildTextureStacks: []
