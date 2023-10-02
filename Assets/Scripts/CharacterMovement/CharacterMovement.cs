@@ -9,6 +9,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpForce = 10.0f;
     private bool isRunning = false;
     public float SkalaGravitasi = 5;
+    public float maxSlopeAngle = 45.0f; // Sesuaikan dengan sudut yang Anda inginkan
     public LayerMask mask;
     public float SphereRadius;
     RaycastHit hit;
@@ -42,18 +43,39 @@ public class CharacterMovement : MonoBehaviour
             isRunning = false;
         }
 
-        // Menggerakkan karakter berdasarkan speed
+        // Mendapatkan kecepatan karakter
         Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         moveDirection.Normalize();
         float speed = isRunning ? runSpeed : moveSpeed;
+
+        // Hanya mengatur kecepatan horizontal jika karakter berada di atas tanah
+        if (IsOnSlope())
+        {
+            Vector3 horizontalVelocity = rb.velocity;
+            horizontalVelocity.y = 0; // Set vertikal kecepatan menjadi nol
+            horizontalVelocity = moveDirection * speed;
+            rb.velocity = horizontalVelocity;
+        }
         Vector3 newPosition = transform.position + moveDirection * speed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
     }
-
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
+    }
+    private bool IsOnSlope()
+    {
+        if (IsGrounded())
+        {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            return slopeAngle > 0 && slopeAngle <= maxSlopeAngle;
+        }
+        return false;
+    }
     void Update()
     {
         // Lompat
-        if (Input.GetKey(KeyCode.Space) && Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+        if (Input.GetKey(KeyCode.Space) && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpForce/10, ForceMode.Impulse);
         }
