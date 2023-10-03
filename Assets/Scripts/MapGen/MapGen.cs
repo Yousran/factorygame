@@ -10,7 +10,7 @@ public class MapGen : MonoBehaviour
 
     public static int SizeX = 600;
 
-    public static int SizeY = 60;
+    public static int SizeY = 80;
 
     public static int SizeZ = 600;
 
@@ -20,7 +20,6 @@ public class MapGen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         if (RandomSeed)
         {
             IslandGen.Seed = Time.realtimeSinceStartup.ToString();

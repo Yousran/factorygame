@@ -45,7 +45,7 @@ public static class IslandGen
     public static int MapSizeZ { get; set; } = MapGen.SizeZ;
 
     public static string Seed;
-    public static float Scale = 1f;
+    public static float Scale = 0.09f;
     public static float OffsetX = 0;
     public static float OffsetZ = 0;
 
@@ -58,17 +58,18 @@ public static class IslandGen
     public static float OffsetZ3 = 3;
 
     public static float exponent1 = 2;
-    public static float exponent2 = 8;
-    public static float exponent3 = 8;
+    public static float exponent2 = 15;
+    public static float exponent3 = 8.19f;
 
-    public static float BatasTinggi3 = 0.3f;
-    public static float BatasTinggi4 = 0.1f;
+    public static float BatasTinggi3 = 0.025f;
+    public static float BatasTinggi4 = 0f;
     public static float BVar1 = 1.15f;
-    public static float BVar2 = 2.2f;
+    public static float BVar2 = 1.17f;
     public static float[,,] DataMap = new float[MapSizeX+1,MapSizeY+1,MapSizeZ+1];
 
     public static float Noise(int x, int z)
     {
+        System.Random SeededRandom = new System.Random(Seed.GetHashCode());
         float e = 0;
         float FallX = (float)(x / (Scale * MapSizeX) + OffsetX);
         float FallZ = (float)(z / (Scale * MapSizeZ) + OffsetZ);
@@ -79,15 +80,14 @@ public static class IslandGen
         float FallX3 = (float)(x / (Scale3 * MapSizeX) + OffsetX3);
         float FallZ3 = (float)(z / (Scale3 * MapSizeZ) + OffsetZ3);
 
-        System.Random SeededRandom = new System.Random(Seed.GetHashCode());
         float value1 = noise.snoise(new float2(FallX, FallZ)) * (float)SeededRandom.NextDouble();
-        float value2 = noise.snoise(new float2(FallX2, FallZ2)) * (float)SeededRandom.NextDouble();
-        float value3 = noise.snoise(new float2(FallX3, FallZ3)) * (float)SeededRandom.NextDouble();
+        float value2 = Mathf.PerlinNoise(FallX2, FallZ2) + (float)SeededRandom.NextDouble() * 0.8f;
+        float value3 = Mathf.PerlinNoise(FallX3, FallZ3) + (float)SeededRandom.NextDouble() * 0.5f;
         e += Mathf.Lerp(1, 0, value1);
         e += Mathf.Lerp(1, 0, value2);
         e += Mathf.Lerp(1, 0, value3);
         e /= 3;
-        return e - Mathf.Lerp(1, 0, FallofMap(x, z));
+        return e *= 1f - Mathf.Lerp(1, 0, FallofMap(x, z));
     }
 
     public static float FallofMap(int x, int z)
@@ -96,10 +96,19 @@ public static class IslandGen
         float FallZ = z / (float)MapSizeZ * 2 - 1;
 
         float Distance = Mathf.Max(MathF.Abs(FallX), MathF.Abs(FallZ));
-        float Distance2 = Mathf.Lerp(BatasTinggi3, 0, 1f - (1f - Mathf.Pow(FallX, exponent1)) * (1f - Mathf.Pow(FallZ, exponent1)));
+        float Distance2 = Mathf.Lerp(0, BatasTinggi3, 1f - (1f - Mathf.Pow(FallX, exponent1)) * (1f - Mathf.Pow(FallZ, exponent1)));
         float Distance3 = Mathf.Pow(BVar1 - Distance, exponent2);
-        float Distance4 = Mathf.Lerp(BatasTinggi4, 0, Mathf.Pow(BVar2 - Distance, exponent2));
-        return (Distance2 + Distance3 + Distance4) / 3;
+        float Distance4 = Mathf.Pow(BVar2 - Distance, exponent3) / 2;
+        float Distance5;
+        if (x < 3 || x >= MapSizeX - 3 || z < 3 || z >= MapSizeZ - 3)
+        {
+            Distance5 = 0f;
+        }
+        else
+        {
+            Distance5 = 0.05f;
+        }
+        return (Distance5 + (Distance3 + Distance4) / 3) - Distance2;
     }
 
     public static void IslandData()
@@ -118,7 +127,7 @@ public static class IslandGen
         };
 
         // Execute the job in parallel
-        JobHandle jobHandle = job.Schedule(dataSize, 1);
+        JobHandle jobHandle = job.Schedule(dataSize, 64);
 
         // Wait for the job to complete
         jobHandle.Complete();

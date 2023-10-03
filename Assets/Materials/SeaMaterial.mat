@@ -47,5 +47,5 @@ Material:
     m_Colors:
     - _Depth_Color: {r: 0.2264151, g: 0.53333336, b: 0.5660378, a: 1}
     - _Foam_Color: {r: 0.54339623, g: 0.6037736, b: 0.60130584, a: 1}
-    - _Water_Color: {r: 0.04784616, g: 0.7207499, b: 0.7924528, a: 1}
+    - _Water_Color: {r: 0.04784616, g: 0.7207499, b: 0.7924528, a: 0.6392157}
   m_BuildTextureStacks: []
