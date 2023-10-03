@@ -16,9 +16,7 @@ public class MapGen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        IslandGen.MapSizeX = SizeX;
-        IslandGen.MapSizeY = SizeY;
-        IslandGen.MapSizeZ = SizeZ;
+        IslandGen.IslandData();
         if (RandomSeed)
         {
             IslandGen.Seed = Time.realtimeSinceStartup.ToString();
@@ -27,8 +25,7 @@ public class MapGen : MonoBehaviour
         {
             IslandGen.Seed = Seed;
         }
-        //MeshGen.ChunkSizeX = IslandGen.MapSizeX / ChunkSize;
-        //MeshGen.ChunkSizeZ = IslandGen.MapSizeZ / ChunkSize;
+
         GenerateChunk();
     }
 

@@ -6,10 +6,10 @@ using Unity.Jobs;
 using Unity.Collections;
 using System;
 
-public class MeshGen : IDisposable
+public class MeshGen
 {
-    NativeList<Vector3> vertices;
-    NativeList<int> triangles;
+    List<Vector3> vertices = new List<Vector3>();
+    List<int> triangles = new List<int>();
     public GameObject ChunkObject;
     MeshFilter meshFilter;
     MeshCollider MeshCol;
@@ -19,7 +19,7 @@ public class MeshGen : IDisposable
     public static int ChunkSizeZ = IslandGen.MapSizeZ / 10;
     Vector3Int ChunkPosition;
 
-    float[,,] MapData = IslandGen.IslandData();
+    float[,,] MapData = IslandGen.DataMap;
 
     void ClearMeshData()
     {
@@ -31,15 +31,14 @@ public class MeshGen : IDisposable
     {
         Mesh mesh = new Mesh();
         mesh.Clear();
-        mesh.vertices = vertices.ToArray(Allocator.Persistent).ToArray();
-        mesh.triangles = triangles.ToArray(Allocator.Persistent).ToArray();
+        mesh.vertices = vertices.ToArray();
+        mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
         meshFilter.mesh = mesh;
         MeshCol.sharedMesh = mesh;
 
     }
 
-    // Start is called before the first frame update
     public MeshGen(Vector3Int _Position)
     {
         ChunkObject = new GameObject();
@@ -53,9 +52,7 @@ public class MeshGen : IDisposable
         ChunkObject.transform.tag = "Terrain";
         ChunkObject.layer = 6;
 
-        vertices = new NativeList<Vector3>(Allocator.Persistent);
-        triangles = new NativeList<int>(Allocator.Persistent);
-
+        ClearMeshData();
         BuatMeshData(_Position);
         BuildMesh();
 
@@ -87,7 +84,6 @@ public class MeshGen : IDisposable
     public void RemoveTerrain(Vector3 Pos)
     {
         Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x), Mathf.CeilToInt(Pos.y), Mathf.CeilToInt(Pos.z));
-        Debug.Log(vector3Int.ToString());
         MapData[vector3Int.x, vector3Int.y, vector3Int.z] = 1;
         MapData[vector3Int.x + 1, vector3Int.y + 1, vector3Int.z + 1] = 1;
         MapData[vector3Int.x - 1, vector3Int.y - 1, vector3Int.z - 1] = 1;
@@ -122,7 +118,7 @@ public class MeshGen : IDisposable
                 Vector3 finalvert = (vert1 + vert2) / 2f;
 
                 vertices.Add(finalvert);
-                triangles.Add(vertices.Length - 1);
+                triangles.Add(vertices.Count - 1);
                 EdgeIndex++;
             }
         }
@@ -147,14 +143,6 @@ public class MeshGen : IDisposable
             }
         }
 
-    }
-    public void Dispose()
-    {
-        if (vertices.IsCreated)
-            vertices.Dispose();
-
-        if (triangles.IsCreated)
-            triangles.Dispose();
     }
 
 }
