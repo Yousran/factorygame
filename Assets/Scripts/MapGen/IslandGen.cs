@@ -40,11 +40,11 @@ public struct BuildNoiseMap : IJobParallelFor
 }
 public static class IslandGen
 {
-    public static int MapSizeX = 100;
-    public static int MapSizeY = 20;
-    public static int MapSizeZ = 100;
+    public static int MapSizeX { get; set; } = MapGen.SizeX;
+    public static int MapSizeY { get; set; } = MapGen.SizeY;
+    public static int MapSizeZ { get; set; } = MapGen.SizeZ;
 
-    public static string Seed = "one";
+    public static string Seed;
     public static float Scale = 1f;
     public static float OffsetX = 0;
     public static float OffsetZ = 0;
@@ -66,7 +66,6 @@ public static class IslandGen
     public static float BVar1 = 1.15f;
     public static float BVar2 = 2.2f;
     public static float[,,] DataMap = new float[MapSizeX+1,MapSizeY+1,MapSizeZ+1];
-    public static System.Random SeededRandom = new System.Random(Seed.GetHashCode());
 
     public static float Noise(int x, int z)
     {
@@ -80,6 +79,7 @@ public static class IslandGen
         float FallX3 = (float)(x / (Scale3 * MapSizeX) + OffsetX3);
         float FallZ3 = (float)(z / (Scale3 * MapSizeZ) + OffsetZ3);
 
+        System.Random SeededRandom = new System.Random(Seed.GetHashCode());
         float value1 = noise.snoise(new float2(FallX, FallZ)) * (float)SeededRandom.NextDouble();
         float value2 = noise.snoise(new float2(FallX2, FallZ2)) * (float)SeededRandom.NextDouble();
         float value3 = noise.snoise(new float2(FallX3, FallZ3)) * (float)SeededRandom.NextDouble();
@@ -107,7 +107,7 @@ public static class IslandGen
         int dataSize = (MapSizeX + 1) * (MapSizeY + 1) * (MapSizeZ + 1);
 
         // Create a NativeArray to store the data
-        NativeArray<float> nativeData = new NativeArray<float>(dataSize, Allocator.Persistent);
+        NativeArray<float> nativeData = new NativeArray<float>(dataSize, Allocator.TempJob);
 
         BuildNoiseMap job = new BuildNoiseMap
         {
@@ -118,7 +118,7 @@ public static class IslandGen
         };
 
         // Execute the job in parallel
-        JobHandle jobHandle = job.Schedule(dataSize, 64);
+        JobHandle jobHandle = job.Schedule(dataSize, 1);
 
         // Wait for the job to complete
         jobHandle.Complete();
@@ -130,7 +130,7 @@ public static class IslandGen
             {
                 for (int z = 0; z < MapSizeZ + 1; z++)
                 {
-                    int index = x + (MapSizeX + 1) * (y + (MapSizeY + 1) * z);
+                    int index = x + (MapSizeX) * (z + (MapSizeZ) * y);
                     DataMap[x, y, z] = nativeData[index];
                 }
             }

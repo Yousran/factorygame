@@ -47,15 +47,6 @@ public class CharacterMovement : MonoBehaviour
         Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         moveDirection.Normalize();
         float speed = isRunning ? runSpeed : moveSpeed;
-
-        // Hanya mengatur kecepatan horizontal jika karakter berada di atas tanah
-        if (IsOnSlope())
-        {
-            Vector3 horizontalVelocity = rb.velocity;
-            horizontalVelocity.y = 0; // Set vertikal kecepatan menjadi nol
-            horizontalVelocity = moveDirection * speed;
-            rb.velocity = horizontalVelocity;
-        }
         Vector3 newPosition = transform.position + moveDirection * speed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
     }

@@ -7,16 +7,20 @@ public class MapGen : MonoBehaviour
 {
     public string Seed;
     public bool RandomSeed = true;
-    public int SizeX = 10;
-    public int SizeY = 10;
-    public int SizeZ = 10;
+
+    public static int SizeX = 600;
+
+    public static int SizeY = 60;
+
+    public static int SizeZ = 600;
+
     public int ChunkSize = 0;
 
     Dictionary<Vector3Int, MeshGen> Chunks = new Dictionary<Vector3Int, MeshGen>();
     // Start is called before the first frame update
     void Start()
     {
-        IslandGen.IslandData();
+
         if (RandomSeed)
         {
             IslandGen.Seed = Time.realtimeSinceStartup.ToString();
@@ -25,6 +29,8 @@ public class MapGen : MonoBehaviour
         {
             IslandGen.Seed = Seed;
         }
+
+        IslandGen.IslandData();
 
         GenerateChunk();
     }
@@ -39,9 +45,9 @@ public class MapGen : MonoBehaviour
                 Vector3Int Chunkpos = new Vector3Int(x * IslandGen.MapSizeX / ChunkSize, 0, z * IslandGen.MapSizeZ / ChunkSize);
                 Chunks.Add(Chunkpos, new MeshGen(Chunkpos));
                 Chunks[Chunkpos].ChunkObject.transform.SetParent(transform);
-                Debug.Log("loaded");
             }
         }
+        Debug.Log("Map Loaded!");
     }
 
     private void OnDrawGizmos()
