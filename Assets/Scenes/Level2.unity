@@ -403,8 +403,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: Seed
+      value: 2,395784
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: RandomSeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: TreePrefabs.Array.size
