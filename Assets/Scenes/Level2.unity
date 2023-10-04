@@ -303,7 +303,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1202737749208207983, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1202737749208207983, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -311,7 +311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1202737749208207983, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1202737749208207983, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -406,6 +406,30 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreePrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 6941765000743290380, guid: c60edd51c065ceb46b345849a03bc106, type: 3}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 9069115365609291303, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
     - target: {fileID: 8218229094001522266, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: m_Name
       value: GameMaster

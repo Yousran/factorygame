@@ -127,7 +127,7 @@ public static class IslandGen
         };
 
         // Execute the job in parallel
-        JobHandle jobHandle = job.Schedule(dataSize, 64);
+        JobHandle jobHandle = job.Schedule(dataSize, 32);
 
         // Wait for the job to complete
         jobHandle.Complete();

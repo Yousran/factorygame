@@ -8,13 +8,15 @@ public class MapGen : MonoBehaviour
     public string Seed;
     public bool RandomSeed = true;
 
-    public static int SizeX = 600;
+    public static int SizeX = 200;
 
-    public static int SizeY = 80;
+    public static int SizeY = 50;
 
-    public static int SizeZ = 600;
+    public static int SizeZ = 200;
 
     public int ChunkSize = 0;
+
+    public GameObject[] TreePrefabs;
 
     Dictionary<Vector3Int, MeshGen> Chunks = new Dictionary<Vector3Int, MeshGen>();
     // Start is called before the first frame update
@@ -32,6 +34,18 @@ public class MapGen : MonoBehaviour
         IslandGen.IslandData();
 
         GenerateChunk();
+        //TreeGen.TreeSpawnCoord();
+        //for (int x = 0; x < SizeX; x++)
+        //{
+        //    for (int z = 0; z < SizeZ; z++)
+        //    {
+        //        if (TreeGen.TreesSpawnNoise[x,z] == 1)
+        //        {
+        //            GameObject InstantiatedTree = Instantiate(TreePrefabs[0], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+        //            InstantiatedTree.AddComponent<TreeMoveDown>();
+        //       }
+        //    }
+        //}
     }
 
 
