@@ -14,7 +14,7 @@ public class MapGen : MonoBehaviour
 
     public static int SizeZ = 200;
 
-    public int ChunkSize = 0;
+    public int ChunkSize = 10;
 
     public GameObject[] TreePrefabs;
 

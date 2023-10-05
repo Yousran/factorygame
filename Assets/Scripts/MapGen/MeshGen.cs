@@ -76,7 +76,6 @@ public class MeshGen
     {
         Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x), Mathf.CeilToInt(Pos.y), Mathf.CeilToInt(Pos.z));
         MapData[vector3Int.x, vector3Int.y, vector3Int.z] = 0f;
-        
         ClearMeshData();
         vector3Int = ChunkPosition;
         BuatMeshData(vector3Int);
@@ -86,7 +85,6 @@ public class MeshGen
     {
         Vector3Int vector3Int = new Vector3Int(Mathf.CeilToInt(Pos.x), Mathf.CeilToInt(Pos.y), Mathf.CeilToInt(Pos.z));
         MapData[vector3Int.x, vector3Int.y, vector3Int.z] = 1;
-        
         ClearMeshData();
         vector3Int = ChunkPosition;
         BuatMeshData(vector3Int);
@@ -126,7 +124,6 @@ public class MeshGen
 
     void BuatMeshData(Vector3 Position)
     {
-        Debug.Log(Position.ToString());
         for (int x = 0; x < ChunkSizeX; x++)
         {
             for (int z = 0; z < ChunkSizeZ; z++)
