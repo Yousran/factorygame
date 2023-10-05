@@ -144,7 +144,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 330561312179823443, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_Name
-      value: Plane
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_LocalScale.x

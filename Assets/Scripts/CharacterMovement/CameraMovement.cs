@@ -37,6 +37,14 @@ public class CameraMovement : MonoBehaviour
                 if (hit.transform.tag == "Terrain")
                 {
                     Map.GetChunkFromV3(hit.transform.position).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + 20, hit.transform.position.y, hit.transform.position.z)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - 20, hit.transform.position.y, hit.transform.position.z)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + 20)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 20)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + 20, hit.transform.position.y, hit.transform.position.z + 20)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - 20, hit.transform.position.y, hit.transform.position.z - 20)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + 20, hit.transform.position.y, hit.transform.position.z - 20)).PlaceTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - 20, hit.transform.position.y, hit.transform.position.z + 20)).PlaceTerrain(hit.point);
                 }
             }
         }
@@ -49,6 +57,14 @@ public class CameraMovement : MonoBehaviour
                 if (hit.transform.tag == "Terrain")
                 {
                     Map.GetChunkFromV3(hit.transform.position).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x+20, hit.transform.position.y, hit.transform.position.z)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - 20, hit.transform.position.y, hit.transform.position.z)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + 20)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - 20)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + 20, hit.transform.position.y, hit.transform.position.z + 20)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - 20, hit.transform.position.y, hit.transform.position.z - 20)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + 20, hit.transform.position.y, hit.transform.position.z - 20)).RemoveTerrain(hit.point);
+                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - 20, hit.transform.position.y, hit.transform.position.z + 20)).RemoveTerrain(hit.point);
                 }
             }
         }
