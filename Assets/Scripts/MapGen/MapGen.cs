@@ -34,18 +34,27 @@ public class MapGen : MonoBehaviour
         IslandGen.IslandData();
 
         GenerateChunk();
-        //TreeGen.TreeSpawnCoord();
-        //for (int x = 0; x < SizeX; x++)
-        //{
-        //    for (int z = 0; z < SizeZ; z++)
-        //    {
-        //        if (TreeGen.TreesSpawnNoise[x,z] == 1)
-        //        {
-        //            GameObject InstantiatedTree = Instantiate(TreePrefabs[0], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
-        //            InstantiatedTree.AddComponent<TreeMoveDown>();
-        //       }
-        //    }
-        //}
+        for (int x = 0; x < SizeX; x++)
+        {
+            for (int z = 0; z < SizeZ; z++)
+            {
+                float spawn = Random.Range(0f, 1f);
+                if (TreeGen.TreeSpawnMap(x,z) == 1 && spawn < 0.002f)
+                {
+                    GameObject InstantiatedTree = Instantiate(TreePrefabs[0], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+                    InstantiatedTree.AddComponent<TreeMoveDown>();
+                }else if (TreeGen.TreeSpawnMap(x, z) == 2 && spawn < 0.04f)
+                {
+                    GameObject InstantiatedTree = Instantiate(TreePrefabs[1], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+                    InstantiatedTree.AddComponent<TreeMoveDown>();
+                }
+                else if (TreeGen.TreeSpawnMap(x, z) == 3 && spawn < 0.05f)
+                {
+                    GameObject InstantiatedTree = Instantiate(TreePrefabs[2], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+                    InstantiatedTree.AddComponent<TreeMoveDown>();
+                }
+            }
+        }
     }
 
 
