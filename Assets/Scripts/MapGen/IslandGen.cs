@@ -58,10 +58,10 @@ public static class IslandGen
     public static float OffsetZ3 = 3;
 
     public static float exponent1 = 2;
-    public static float exponent2 = 15;
+    public static float exponent2 = 2;
     public static float exponent3 = 8.19f;
 
-    public static float BatasTinggi3 = 0.025f;
+    public static float BatasTinggi3 = 0.08f;
     public static float BatasTinggi4 = 0f;
     public static float BVar1 = 1.15f;
     public static float BVar2 = 1.17f;

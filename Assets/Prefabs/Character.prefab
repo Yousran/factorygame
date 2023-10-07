@@ -53,6 +53,7 @@ MonoBehaviour:
   runSpeed: 10
   jumpForce: 10
   SkalaGravitasi: 5
+  maxSlopeAngle: 45
   mask:
     serializedVersion: 2
     m_Bits: 64
@@ -72,7 +73,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3072992446048653812}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

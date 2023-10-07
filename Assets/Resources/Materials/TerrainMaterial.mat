@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TerrainMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: c1c2fbb0ff95f5240b63373cf1e16b9b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 202a2635f5b59e84e8aaae3760ce26b7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -64,12 +64,32 @@ Material:
         m_Texture: {fileID: 2800000, guid: bce8f03d3e87d264980148893ffc1ef5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_2094c523a65d470fbd1cade928b796b4_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: bce8f03d3e87d264980148893ffc1ef5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Triplanar_226f12215bf146f6bb62d8f76daa4d94_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 363a152b3f5ecc24ab1c664bda19ead7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_22a3d36976e84944a576a32a5eac9b74_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 363a152b3f5ecc24ab1c664bda19ead7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_56e9b64dd1e646b2a3b2060e79bff666_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: bd7e93bf04088a3419f9ef30a86a1c6e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_7ae5e8dc7e254e72ad6cdcd55b382a20_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 363a152b3f5ecc24ab1c664bda19ead7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Triplanar_7de5562e1ab54a22a2edad2f8728243d_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 363a152b3f5ecc24ab1c664bda19ead7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_a64b0adec38d42cd970cc6b89a50722f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 289f351246e6c5a46befa80948378874, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Triplanar_bc3f45fd9a924c0ab0cae6de3a743d7e_Texture_1_Texture2D:
@@ -84,17 +104,48 @@ Material:
         m_Texture: {fileID: 2800000, guid: bd7e93bf04088a3419f9ef30a86a1c6e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _GrassHeight: 0
+    - _Grass_Height: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _SandHeight: 2
     - _SandTreshold: 0
+    - _Sand_Height: 2
     - _StoneHeight: 14
+    - _Stone_Height: 14
+    - _Treshold: 0.1
     m_Colors:
     - _DirtColor: {r: 0.4433962, g: 0.3305645, b: 0.1815415, a: 1}
     - _GrassColor: {r: 0.1627625, g: 0.6792453, b: 0.3505744, a: 1}
     - _SandColor: {r: 0.8396226, g: 0.7633523, b: 0.60516196, a: 1}
     - _StoneColor: {r: 0.3113208, g: 0.3113208, b: 0.3113208, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &5706221858753832735
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
