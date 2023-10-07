@@ -11,13 +11,15 @@ This repo contains the Unity Project of factory esque game with conveyor and pro
 ---
 
 ### Features
-
-<img width = "400" src="./Project Documentation/island side.png" />
 Using universal render pipeline shader graph
-<img width = "400" src="./Project Documentation/procedural generated.png" />
+<img width = "400" src="./Project Documentation/island side.png" />
+
 Procedurally generated island using seeded perlin noise and fallout map
-<img width = "400" src="./Project Documentation/island top.png" />
+<img width = "400" src="./Project Documentation/procedural generated.png" />
+
 Mesh generated using marching cubes algorithm
+<img width = "400" src="./Project Documentation/island top.png" />
+
 
 ### Overview
 
