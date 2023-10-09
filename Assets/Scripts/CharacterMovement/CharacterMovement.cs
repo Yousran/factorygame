@@ -9,6 +9,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpForce = 10.0f;
     private bool isRunning = false;
     public float SkalaGravitasi = 5;
+    public float raycastDistance = 0.5f;
     public float maxSlopeAngle = 45.0f; // Sesuaikan dengan sudut yang Anda inginkan
     public LayerMask mask;
     public float SphereRadius;
@@ -47,8 +48,15 @@ public class CharacterMovement : MonoBehaviour
         Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         moveDirection.Normalize();
         float speed = isRunning ? runSpeed : moveSpeed;
-        Vector3 newPosition = transform.position + moveDirection * speed * Time.fixedDeltaTime;
-        rb.MovePosition(newPosition);
+        Vector3 newPosition = moveDirection * speed * Time.fixedDeltaTime;
+        // Menggunakan raycast untuk mendeteksi tabrakan
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(transform.position.x,transform.position.y+1,transform.position.z), moveDirection, out hit, raycastDistance))
+        {
+            // Jika terdeteksi tabrakan, hindari bergerak ke arah tersebut
+            newPosition = Vector3.zero;
+        }
+        rb.MovePosition(rb.position+newPosition);
     }
     private bool IsGrounded()
     {
