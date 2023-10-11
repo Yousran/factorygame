@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6644918257643669771}
   - component: {fileID: 7949504092753509164}
+  - component: {fileID: 321252596978669959}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -44,9 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7982c285ebc1886459527fb26f03c5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Seed: 
-  RandomSeed: 1
-  SizeX: 100
-  SizeY: 20
-  SizeZ: 100
+  Seed: 2,395784
+  RandomSeed: 0
   ChunkSize: 10
+  TreePrefabs:
+  - {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
+  - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+  - {fileID: 6941765000743290380, guid: c60edd51c065ceb46b345849a03bc106, type: 3}
+--- !u!114 &321252596978669959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218229094001522266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a141aa6eed43944b94a51c98cc8e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: {fileID: 3653961522872820463, guid: a67c141be8a972c42b859d8961a155b5, type: 3}
+  Player: {fileID: 0}

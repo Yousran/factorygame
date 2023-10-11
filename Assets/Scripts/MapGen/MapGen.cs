@@ -41,20 +41,22 @@ public class MapGen : MonoBehaviour
                 float spawn = Random.Range(0f, 1f);
                 if (TreeGen.TreeSpawnMap(x,z) == 1 && spawn < 0.002f)
                 {
-                    GameObject InstantiatedTree = Instantiate(TreePrefabs[0], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+                    GameObject InstantiatedTree = Instantiate(TreePrefabs[0], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
                     InstantiatedTree.AddComponent<TreeMoveDown>();
                 }else if (TreeGen.TreeSpawnMap(x, z) == 2 && spawn < 0.04f)
                 {
-                    GameObject InstantiatedTree = Instantiate(TreePrefabs[1], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+                    GameObject InstantiatedTree = Instantiate(TreePrefabs[1], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
                     InstantiatedTree.AddComponent<TreeMoveDown>();
                 }
                 else if (TreeGen.TreeSpawnMap(x, z) == 3 && spawn < 0.05f)
                 {
-                    GameObject InstantiatedTree = Instantiate(TreePrefabs[2], new Vector3(x, transform.position.y + SizeY, z), Quaternion.identity);
+                    GameObject InstantiatedTree = Instantiate(TreePrefabs[2], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
                     InstantiatedTree.AddComponent<TreeMoveDown>();
                 }
             }
         }
+        PortGen portGenerator = GetComponent<PortGen>();
+        portGenerator.SpawnPort(SizeX * (int)transform.localScale.x, SizeZ * (int)transform.localScale.z);
     }
 
 
