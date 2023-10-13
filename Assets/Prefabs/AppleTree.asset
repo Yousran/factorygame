@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8de52d535f8f67b47a86387f888cce6e, type: 3}
+  m_Name: AppleTree
+  m_EditorClassIdentifier: 
+  PrefabPohon:
+  - {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
+  - {fileID: 6941765000743290380, guid: c60edd51c065ceb46b345849a03bc106, type: 3}
+  - {fileID: 6239969156481229051, guid: b71b0f8d2f881c743a85228f3030d1cb, type: 3}
+  PrefabKayu:
+  - {fileID: 5965767929315401797, guid: a36ca54e2389d2a4a8492540496998dc, type: 3}
+  - {fileID: 6493459074817581348, guid: bfd9c33f6906d814c82f5b0acffffe4b, type: 3}
+  - {fileID: 3332423901443081815, guid: 7ce90e6022f16b043b64755895a3dfee, type: 3}
+  HealthPohon: 30
+  MinWoodSpawn: 2
+  MaxWoodSpawn: 5
+  SpawnRate: 0.15
+  MaxVerticalSpawnRate: 0.29
+  MinVerticalSpawnRate: 0.06

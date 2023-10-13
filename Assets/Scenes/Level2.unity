@@ -475,6 +475,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreeToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreeToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e37dc7206ac3c349aea79d2b998f8ea, type: 2}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreeToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c53423478896bde458980dd53ac995b4, type: 2}
     - target: {fileID: 8218229094001522266, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: m_Name
       value: GameMaster

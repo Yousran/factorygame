@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -27,11 +28,25 @@ public class TreeGen
         {
             return 0;
         }
-
     }
-    
-    
+}
 
+public class TreeStats : MonoBehaviour
+{
+    public float HealthPohon;
+    public int WoodToSpawn;
+    public GameObject[] WoodPrefabs;
+    public void TreeIsChopped()
+    {
+        for (int i = 0; i < WoodToSpawn; i++)
+        {
+            GameObject SpawnedWood = 
+                Instantiate(WoodPrefabs[UnityEngine.Random.Range(0,WoodPrefabs.Length)],
+                transform.position,quaternion.identity);
+            
+        }
+        Destroy(gameObject);
+    }
 
 }
 public class TreeMoveDown : MonoBehaviour
@@ -39,7 +54,6 @@ public class TreeMoveDown : MonoBehaviour
     RaycastHit hit;
     private void Start()
     {
-        
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
             if (hit.transform.tag == "Terrain" && Vector3.Angle(hit.normal, Vector3.up) == 0)

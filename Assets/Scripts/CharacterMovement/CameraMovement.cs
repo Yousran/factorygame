@@ -38,38 +38,48 @@ public class CameraMovement : MonoBehaviour
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 1f));
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
-                if (hit.transform.tag == "Terrain")
-                {
-                    Map.GetChunkFromV3(hit.transform.position).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX/Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
-                }
+                //if (hit.transform.tag == "Terrain")
+                //{
+                //    Map.GetChunkFromV3(hit.transform.position).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX/Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).PlaceTerrain(hit.point);
+                //}
             }
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 1f));
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "Terrain")
+                //Chop Tree Logic
+                if (hit.transform.GetComponentInParent<TreeStats>())
                 {
-                    Map.GetChunkFromV3(hit.transform.position).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x+ MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
-                    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                    hit.transform.GetComponentInParent<TreeStats>().HealthPohon -= 1;
+                    Debug.Log(hit.transform.GetComponentInParent<TreeStats>().HealthPohon);
+                    if (hit.transform.GetComponentInParent<TreeStats>().HealthPohon <= 0)
+                    {
+                        hit.transform.GetComponentInParent<TreeStats>().TreeIsChopped();
+                    }
                 }
+                //if (hit.transform.tag == "Terrain")
+                //{
+                //    Map.GetChunkFromV3(hit.transform.position).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x+ MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z)).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                //    Map.GetChunkFromV3(new Vector3(hit.transform.position.x + MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z - MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                //   Map.GetChunkFromV3(new Vector3(hit.transform.position.x - MapSizeX / Map.ChunkSize, hit.transform.position.y, hit.transform.position.z + MapSizeZ / Map.ChunkSize)).RemoveTerrain(hit.point);
+                //}
             }
         }
     }

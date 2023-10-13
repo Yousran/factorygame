@@ -16,7 +16,7 @@ public class MapGen : MonoBehaviour
 
     public int ChunkSize = 10;
 
-    public GameObject[] TreePrefabs;
+    public Trees[] TreeToSpawn;
 
     Dictionary<Vector3Int, MeshGen> Chunks = new Dictionary<Vector3Int, MeshGen>();
     // Start is called before the first frame update
@@ -30,35 +30,47 @@ public class MapGen : MonoBehaviour
         {
             IslandGen.Seed = Seed;
         }
-
+        //generate island mesh and chunk
         IslandGen.IslandData();
-
         GenerateChunk();
-        for (int x = 0; x < SizeX; x++)
-        {
-            for (int z = 0; z < SizeZ; z++)
-            {
-                float spawn = Random.Range(0f, 1f);
-                if (TreeGen.TreeSpawnMap(x,z) == 1 && spawn < 0.002f)
-                {
-                    GameObject InstantiatedTree = Instantiate(TreePrefabs[0], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
-                    InstantiatedTree.AddComponent<TreeMoveDown>();
-                }else if (TreeGen.TreeSpawnMap(x, z) == 2 && spawn < 0.04f)
-                {
-                    GameObject InstantiatedTree = Instantiate(TreePrefabs[1], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
-                    InstantiatedTree.AddComponent<TreeMoveDown>();
-                }
-                else if (TreeGen.TreeSpawnMap(x, z) == 3 && spawn < 0.05f)
-                {
-                    GameObject InstantiatedTree = Instantiate(TreePrefabs[2], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
-                    InstantiatedTree.AddComponent<TreeMoveDown>();
-                }
-            }
-        }
+
+        GenerateTrees();
+        
         PortGen portGenerator = GetComponent<PortGen>();
         portGenerator.SpawnPort(SizeX * (int)transform.localScale.x, SizeZ * (int)transform.localScale.z);
     }
 
+    void GenerateTrees()
+    {
+        //generate trees
+        for (int x = 0; x < SizeX; x++)
+        {
+            for (int z = 0; z < SizeZ; z++)
+            {
+                float Spawn = Random.Range(0f, 1f);
+                float Noise = IslandGen.Noise(x, z);
+                for (int i = 0; i < TreeToSpawn.Length; i++)
+                {
+                    if (Spawn <= TreeToSpawn[i].SpawnRate)
+                    {
+                        Trees ChoosenTreeToSpawn = TreeToSpawn[i];
+                        int NumWoodToSpawn = Random.Range(ChoosenTreeToSpawn.MinWoodSpawn, ChoosenTreeToSpawn.MaxWoodSpawn);
+                        int WoodPrefabToSpawn = Random.Range(0,ChoosenTreeToSpawn.PrefabPohon.Length);
+                        if (Noise <= ChoosenTreeToSpawn.MaxVerticalSpawnRate 
+                            && Noise >= ChoosenTreeToSpawn.MinVerticalSpawnRate)
+                        {
+                            GameObject InstantiatedTree = Instantiate(ChoosenTreeToSpawn.PrefabPohon[WoodPrefabToSpawn], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
+                            InstantiatedTree.AddComponent<TreeStats>();
+                            InstantiatedTree.GetComponent<TreeStats>().HealthPohon = ChoosenTreeToSpawn.HealthPohon;
+                            InstantiatedTree.GetComponent<TreeStats>().WoodToSpawn = NumWoodToSpawn;
+                            InstantiatedTree.GetComponent<TreeStats>().WoodPrefabs = ChoosenTreeToSpawn.PrefabKayu;
+                            InstantiatedTree.AddComponent<TreeMoveDown>();
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     void GenerateChunk()
     {
@@ -74,12 +86,6 @@ public class MapGen : MonoBehaviour
         Debug.Log("Map Loaded!");
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x + SizeX / 2, transform.position.y + SizeY / 2, transform.position.z + SizeZ / 2), new Vector3(SizeX, SizeY, SizeZ));
-    }
-
     public MeshGen GetChunkFromV3(Vector3 pos)
     {
         int x = (int)pos.x;
@@ -87,5 +93,10 @@ public class MapGen : MonoBehaviour
         int z = (int)pos.z;
 
         return Chunks[new Vector3Int(x, y, z)];
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x + SizeX / 2, transform.position.y + SizeY / 2, transform.position.z + SizeZ / 2), new Vector3(SizeX, SizeY, SizeZ));
     }
 }
