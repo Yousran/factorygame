@@ -64,6 +64,7 @@ public class MapGen : MonoBehaviour
                             InstantiatedTree.GetComponent<TreeStats>().HealthPohon = ChoosenTreeToSpawn.HealthPohon;
                             InstantiatedTree.GetComponent<TreeStats>().WoodToSpawn = NumWoodToSpawn;
                             InstantiatedTree.GetComponent<TreeStats>().WoodPrefabs = ChoosenTreeToSpawn.PrefabKayu;
+                            InstantiatedTree.GetComponent<TreeStats>().HargaWood = ChoosenTreeToSpawn.HargaKayu;
                             InstantiatedTree.AddComponent<TreeMoveDown>();
                         }
                     }

@@ -6,15 +6,18 @@ using UnityEngine;
 public class Trees : ScriptableObject
 {
     public GameObject[] PrefabPohon;
-    public GameObject[] PrefabKayu;
     public float HealthPohon;
-    public int MinWoodSpawn;
-    public int MaxWoodSpawn;
     [Range(0f,1f)]
     public float SpawnRate;
     [Range(0f, 1f)]
     public float MaxVerticalSpawnRate;
     [Range(0f, 1f)]
     public float MinVerticalSpawnRate;
+
+    [Header("Woods")]
+    public GameObject[] PrefabKayu;
+    public int MinWoodSpawn;
+    public int MaxWoodSpawn;
+    public int HargaKayu;
 
 }

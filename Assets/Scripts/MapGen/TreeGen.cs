@@ -36,6 +36,7 @@ public class TreeStats : MonoBehaviour
     public float HealthPohon;
     public int WoodToSpawn;
     public GameObject[] WoodPrefabs;
+    public int HargaWood;
     public void TreeIsChopped()
     {
         for (int i = 0; i < WoodToSpawn; i++)
@@ -43,11 +44,17 @@ public class TreeStats : MonoBehaviour
             GameObject SpawnedWood = 
                 Instantiate(WoodPrefabs[UnityEngine.Random.Range(0,WoodPrefabs.Length)],
                 transform.position,quaternion.identity);
-            
+            SpawnedWood.AddComponent<WoodStat>();
+            SpawnedWood.AddComponent<ObjectDragging>();
+            SpawnedWood.GetComponent<WoodStat>().HargaWood = HargaWood;
         }
         Destroy(gameObject);
     }
 
+}
+public class WoodStat : MonoBehaviour
+{
+    public int HargaWood;
 }
 public class TreeMoveDown : MonoBehaviour
 {
