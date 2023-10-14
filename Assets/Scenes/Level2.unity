@@ -21,10 +21,10 @@ RenderSettings:
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientEquatorColor: {r: 0.37805265, g: 0.5304663, b: 0.6320754, a: 1}
+  m_AmbientGroundColor: {r: 0, g: 0.10308754, b: 0.3962264, a: 1}
   m_AmbientIntensity: 0.2
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: dda853610e076dc4797c179305d919b2, type: 2}
   m_HaloStrength: 0.5
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 50c943f41c8ed64469b43d8d2754d640, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -536,15 +536,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: RandomSeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: TreeToSpawn.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: TreeToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 9e37dc7206ac3c349aea79d2b998f8ea, type: 2}
+      objectReference: {fileID: 11400000, guid: 023af2ffd18db4f48b19fe2cbfaa870a, type: 2}
     - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: TreeToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e37dc7206ac3c349aea79d2b998f8ea, type: 2}
+    - target: {fileID: 7949504092753509164, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: TreeToSpawn.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: c53423478896bde458980dd53ac995b4, type: 2}
     - target: {fileID: 8218229094001522266, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
