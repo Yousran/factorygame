@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1;" />
     <ui:Label tabindex="-1" text="." parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="Crosshair" style="position: absolute; left: 50%; top: 50%; right: 50%; bottom: 50%; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: lower-center; font-size: 70px; text-overflow: ellipsis; white-space: nowrap; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 1px;" />
+    <ui:ProgressBar value="0" title="Tree Health" name="TreeHealthBar" style="visibility: visible; position: absolute; left: 40%; top: 55%; min-width: 20%; min-height: 24px; align-self: stretch; max-width: 30%; text-overflow: clip; right: 50%; bottom: 40%; align-items: stretch; justify-content: center; transform-origin: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; max-height: 24px;" />
 </ui:UXML>

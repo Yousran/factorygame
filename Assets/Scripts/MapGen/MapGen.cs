@@ -62,6 +62,7 @@ public class MapGen : MonoBehaviour
                             GameObject InstantiatedTree = Instantiate(ChoosenTreeToSpawn.PrefabPohon[WoodPrefabToSpawn], new Vector3(x, transform.position.y + SizeY, z), Quaternion.Euler(0, Random.Range(0f, 360f), 0));
                             InstantiatedTree.AddComponent<TreeStats>();
                             InstantiatedTree.GetComponent<TreeStats>().HealthPohon = ChoosenTreeToSpawn.HealthPohon;
+                            InstantiatedTree.GetComponent<TreeStats>().MaxHealthPohon = ChoosenTreeToSpawn.HealthPohon;
                             InstantiatedTree.GetComponent<TreeStats>().WoodToSpawn = NumWoodToSpawn;
                             InstantiatedTree.GetComponent<TreeStats>().WoodPrefabs = ChoosenTreeToSpawn.PrefabKayu;
                             InstantiatedTree.GetComponent<TreeStats>().HargaWood = ChoosenTreeToSpawn.HargaKayu;

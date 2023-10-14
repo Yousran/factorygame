@@ -34,6 +34,7 @@ public class TreeGen
 public class TreeStats : MonoBehaviour
 {
     public float HealthPohon;
+    public float MaxHealthPohon;
     public int WoodToSpawn;
     public GameObject[] WoodPrefabs;
     public int HargaWood;

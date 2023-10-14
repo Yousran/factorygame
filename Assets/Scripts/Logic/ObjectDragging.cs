@@ -29,6 +29,7 @@ public class ObjectDragging : MonoBehaviour
         {
             Vector3 ArahPindah= Vector3.Lerp(transform.position,GrabPointTransform.position, Time.deltaTime * 10f);
             rb.MovePosition(ArahPindah);
+            rb.MoveRotation(GrabPointTransform.rotation);
         }
     }
 }
