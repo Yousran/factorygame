@@ -5,16 +5,17 @@ using UnityEngine;
 public class FerrySelling : MonoBehaviour
 {
     public int total = 0;
+    public TreeChopProgress UI;
     // Start is called before the first frame update
     void Start()
     {
-        
+        UI = FindObjectOfType<TreeChopProgress>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+            UI.BankUI.text = total.ToString();
     }
     private void OnTriggerEnter(Collider other)
     {
