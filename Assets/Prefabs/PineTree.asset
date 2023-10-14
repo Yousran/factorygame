@@ -15,13 +15,14 @@ MonoBehaviour:
   PrefabPohon:
   - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
   - {fileID: 9069115365609291303, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
+  HealthPohon: 40
+  SpawnRate: 0.3
+  MaxVerticalSpawnRate: 1
+  MinVerticalSpawnRate: 0.3
   PrefabKayu:
   - {fileID: 5965767929315401797, guid: a36ca54e2389d2a4a8492540496998dc, type: 3}
   - {fileID: 6493459074817581348, guid: bfd9c33f6906d814c82f5b0acffffe4b, type: 3}
   - {fileID: 3332423901443081815, guid: 7ce90e6022f16b043b64755895a3dfee, type: 3}
-  HealthPohon: 40
   MinWoodSpawn: 1
   MaxWoodSpawn: 4
-  SpawnRate: 0.3
-  MaxVerticalSpawnRate: 1
-  MinVerticalSpawnRate: 0.3
+  HargaKayu: 7

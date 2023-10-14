@@ -123,6 +123,42 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &221503086 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5753381323852507368, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
+  m_PrefabInstance: {fileID: 200234232277019383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &592909393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592909394}
+  m_Layer: 0
+  m_Name: HoldingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &592909394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592909393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 221503086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1625898871 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3072992446048653812, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
@@ -418,9 +454,16 @@ PrefabInstance:
       propertyPath: Map
       value: 
       objectReference: {fileID: 1774580137}
+    - target: {fileID: 8952325505975571277, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
+      propertyPath: HoldingPoint
+      value: 
+      objectReference: {fileID: 592909394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5753381323852507368, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 592909394}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf9611e0594d04b49b7f52528980cdb7, type: 3}
 --- !u!1001 &796626755734231812

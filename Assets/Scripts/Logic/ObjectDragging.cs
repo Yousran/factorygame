@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class ObjectDragging : MonoBehaviour
 {
-    private Vector3 OffsetMouse;
-    private float mousezcoord;
-    private void OnMouseDown()
+    private Rigidbody rb;
+    private Transform GrabPointTransform;
+
+    private void Awake()
     {
-        OffsetMouse = gameObject.transform.position - GetMouseWorldPos();
+        rb = GetComponent<Rigidbody>();
     }
-    Vector3 GetMouseWorldPos()
+
+    public void Grab(Transform HoldPoint)
     {
-        Vector3 point = Input.mousePosition;
-
-        point.z = mousezcoord;
-
-        return Camera.main.ScreenToWorldPoint(point);
-
-
+        rb.useGravity = false;
+        GrabPointTransform = HoldPoint;
     }
-    private void OnMouseDrag()
+    public void Drop()
     {
-        transform.position = GetMouseWorldPos() + OffsetMouse;
+        GrabPointTransform = null;
+        rb.useGravity = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (GrabPointTransform != null)
+        {
+            Vector3 ArahPindah= Vector3.Lerp(transform.position,GrabPointTransform.position, Time.deltaTime * 10f);
+            rb.MovePosition(ArahPindah);
+        }
     }
 }
