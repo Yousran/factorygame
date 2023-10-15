@@ -40,6 +40,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 81e748cd9495e6743942689087dc88fc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NightStarSkySubShader_7341790b2c0e4502bf039b98485e4e65_SkyTexture_2136258833_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 94ec2ef52498dca4ea1013716bcd543d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NightStarSkySubShader_818a7be11d8140b4b5514c1ddd78fb3c_SkyTexture_2136258833_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 94ec2ef52498dca4ea1013716bcd543d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_19d3aa62eb54439c831b0d9f98a85383_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 94ec2ef52498dca4ea1013716bcd543d, type: 3}
         m_Scale: {x: 1, y: 1}
