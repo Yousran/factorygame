@@ -8,13 +8,14 @@ public class MapGen : MonoBehaviour
     public string Seed;
     public bool RandomSeed = true;
 
-    public static int SizeX = 200;
+    public static int SizeX = 500;
 
-    public static int SizeY = 50;
+    public static int SizeY = 100;
 
-    public static int SizeZ = 200;
+    public static int SizeZ = 500;
 
-    public int ChunkSize = 10;
+    public static int _ChunkSize = 10;
+    public int ChunkSize { get; set; } = _ChunkSize;
 
     public Trees[] TreeToSpawn;
 
@@ -66,7 +67,8 @@ public class MapGen : MonoBehaviour
                             InstantiatedTree.GetComponent<TreeStats>().WoodToSpawn = NumWoodToSpawn;
                             InstantiatedTree.GetComponent<TreeStats>().WoodPrefabs = ChoosenTreeToSpawn.PrefabKayu;
                             InstantiatedTree.GetComponent<TreeStats>().HargaWood = ChoosenTreeToSpawn.HargaKayu;
-                            InstantiatedTree.AddComponent<TreeMoveDown>();
+                            InstantiatedTree.AddComponent<MoveDown>();
+                            InstantiatedTree.transform.SetParent(transform.GetChild(1));
                         }
                     }
                 }
@@ -82,7 +84,7 @@ public class MapGen : MonoBehaviour
             {
                 Vector3Int Chunkpos = new Vector3Int(x * IslandGen.MapSizeX / ChunkSize, 0, z * IslandGen.MapSizeZ / ChunkSize);
                 Chunks.Add(Chunkpos, new MeshGen(Chunkpos));
-                Chunks[Chunkpos].ChunkObject.transform.SetParent(transform);
+                Chunks[Chunkpos].ChunkObject.transform.SetParent(transform.GetChild(0));
             }
         }
         Debug.Log("Map Loaded!");

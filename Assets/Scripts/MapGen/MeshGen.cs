@@ -14,9 +14,9 @@ public class MeshGen
     MeshFilter meshFilter;
     MeshCollider MeshCol;
     MeshRenderer meshRend;
-    public static int ChunkSizeX = MapGen.SizeX / 10;
+    public static int ChunkSizeX = MapGen.SizeX / MapGen._ChunkSize;
     public static int ChunkSizeY = MapGen.SizeY;
-    public static int ChunkSizeZ = MapGen.SizeZ / 10;
+    public static int ChunkSizeZ = MapGen.SizeZ / MapGen._ChunkSize;
     Vector3Int ChunkPosition;
 
     float[,,] MapData = IslandGen.DataMap;

@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
   - {fileID: 9069115365609291303, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
   HealthPohon: 40
-  SpawnRate: 0.3
+  SpawnRate: 0.1
   MaxVerticalSpawnRate: 1
   MinVerticalSpawnRate: 0.3
   PrefabKayu:

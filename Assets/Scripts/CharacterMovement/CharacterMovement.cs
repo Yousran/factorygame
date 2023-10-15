@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterMovement : MonoBehaviour
 {   public float moveSpeed = 5.0f;
     public float runSpeed = 10.0f;
     public float jumpForce = 10.0f;
-    private bool isRunning = false;
     public float SkalaGravitasi = 5;
-    public float raycastDistance = 0.5f;
+    public float raycastDistance = 1f;
     public float maxSlopeAngle = 45.0f; // Sesuaikan dengan sudut yang Anda inginkan
     public LayerMask mask;
     public float SphereRadius;
     RaycastHit hit;
 
     private Rigidbody rb;
-
+    private bool isRunning = false;
+    // Chunk yang overlapp dengan sphere 
     private HashSet<GameObject> objectsInSphere = new HashSet<GameObject>();
+    private Vector3 moveDirection;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
         // Mengunci kursor mouse ke tengah layar dan menyembunyikannya
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -28,12 +32,9 @@ public class CharacterMovement : MonoBehaviour
         // Input pengguna untuk mengontrol karakter
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        float mouseX = Input.GetAxis("Mouse X");
 
         rb.AddForce(Physics.gravity * (SkalaGravitasi - 1) * rb.mass);
 
-        // Mengatur rotasi karakter berdasarkan input mouse X
-        transform.Rotate(Vector3.up * mouseX);
         // Memeriksa apakah karakter berlari
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -45,31 +46,20 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Mendapatkan kecepatan karakter
-        Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+        moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         moveDirection.Normalize();
         float speed = isRunning ? runSpeed : moveSpeed;
         Vector3 newPosition = moveDirection * speed * Time.fixedDeltaTime;
+
+
         // Menggunakan raycast untuk mendeteksi tabrakan
         RaycastHit hit;
-        if (Physics.Raycast(new Vector3(transform.position.x,transform.position.y+1,transform.position.z), moveDirection, out hit, raycastDistance))
+        if (Physics.Raycast(new Vector3(transform.position.x,transform.position.y+ 0.5f, transform.position.z), new Vector3(moveDirection.x, moveDirection.y + 0.5f, moveDirection.z), out hit, raycastDistance))
         {
             // Jika terdeteksi tabrakan, hindari bergerak ke arah tersebut
             newPosition = Vector3.zero;
         }
-        rb.MovePosition(rb.position+newPosition);
-    }
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
-    }
-    private bool IsOnSlope()
-    {
-        if (IsGrounded())
-        {
-            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-            return slopeAngle > 0 && slopeAngle <= maxSlopeAngle;
-        }
-        return false;
+        rb.MovePosition(rb.position + newPosition);
     }
     void Update()
     {
@@ -79,7 +69,24 @@ public class CharacterMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce/10, ForceMode.Impulse);
         }
 
+        ChunkRenderer();
 
+    }
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f);
+    }
+    bool IsOnSlope()
+    {
+        if (IsGrounded())
+        {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            return slopeAngle > 0 && slopeAngle <= maxSlopeAngle;
+        }
+        return false;
+    }
+    void ChunkRenderer()
+    {
         Collider[] colliders = Physics.OverlapSphere(transform.position, SphereRadius, mask);
 
         // Create a HashSet of GameObjects in the current frame
@@ -117,11 +124,13 @@ public class CharacterMovement : MonoBehaviour
 
         // Update the HashSet of objects for the current frame
         objectsInSphere = currentFrameObjects;
-
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, SphereRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), transform.position+new Vector3(moveDirection.x, moveDirection.y + 0.5f, moveDirection.z));
     }
 }

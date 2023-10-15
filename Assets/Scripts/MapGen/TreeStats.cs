@@ -32,7 +32,7 @@ public class WoodStat : MonoBehaviour
 {
     public int HargaWood;
 }
-public class TreeMoveDown : MonoBehaviour
+public class MoveDown : MonoBehaviour
 {
     RaycastHit hit;
     private void Start()

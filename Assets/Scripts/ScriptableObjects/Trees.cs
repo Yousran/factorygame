@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Tree",menuName ="Trees")]
+[CreateAssetMenu(fileName ="Tree",menuName ="Map/Trees")]
 public class Trees : ScriptableObject
 {
     public GameObject[] PrefabPohon;

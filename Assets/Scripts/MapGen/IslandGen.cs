@@ -15,8 +15,6 @@ public struct BuildNoiseMap : IJobParallelFor
     public int MapSizeZ;
     public NativeArray<float> Data; // NativeArray to store data
 
-    // ...
-
     public void Execute(int index)
     {
         int x = index % MapSizeX;
@@ -113,10 +111,10 @@ public static class IslandGen
 
     public static void IslandData()
     {
-        int dataSize = (MapSizeX + 1) * (MapSizeY + 1) * (MapSizeZ + 1);
+        long dataSize = (MapSizeX + 1) * (MapSizeY + 1) * (MapSizeZ + 1);
 
         // Create a NativeArray to store the data
-        NativeArray<float> nativeData = new NativeArray<float>(dataSize, Allocator.TempJob);
+        NativeArray<float> nativeData = new NativeArray<float>((int)dataSize, Allocator.TempJob);
 
         BuildNoiseMap job = new BuildNoiseMap
         {
@@ -127,7 +125,7 @@ public static class IslandGen
         };
 
         // Execute the job in parallel
-        JobHandle jobHandle = job.Schedule(dataSize, 32);
+        JobHandle jobHandle = job.Schedule((int)dataSize, 100);
 
         // Wait for the job to complete
         jobHandle.Complete();
@@ -139,8 +137,8 @@ public static class IslandGen
             {
                 for (int z = 0; z < MapSizeZ + 1; z++)
                 {
-                    int index = x + (MapSizeX) * (z + (MapSizeZ) * y);
-                    DataMap[x, y, z] = nativeData[index];
+                    long index = x + (MapSizeX) * (z + (MapSizeZ) * y);
+                    DataMap[x, y, z] = nativeData[(int)index];
                 }
             }
         }
