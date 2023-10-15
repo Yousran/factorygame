@@ -34,7 +34,7 @@ public class SunCycle : MonoBehaviour
         }
         else if (currentRotation >= 160)
         {
-            SkyboxLerpValue = (5 - (currentRotation - 160)) / 5;
+            SkyboxLerpValue = Mathf.Clamp((5 - (currentRotation - 160)) / 5,0f,1f);
         }
 
 
