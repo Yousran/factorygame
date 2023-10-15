@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -21,6 +22,14 @@ public class CameraMovement : MonoBehaviour
     private void Start()
     {
         cam = this.GetComponent<Camera>();
+        if (UITree == null)
+        {
+            UITree = FindObjectOfType<TreeChopProgress>();
+        }
+        if (Map == null)
+        {
+            Map = FindObjectOfType<MapGen>();
+        }
     }
 
     void Update()

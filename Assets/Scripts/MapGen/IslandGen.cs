@@ -7,7 +7,6 @@ using Unity.Jobs;
 using Unity.Collections;
 using Unity.Burst;
 
-[BurstCompile(CompileSynchronously = true)]
 public struct BuildNoiseMap : IJobParallelFor
 {
     public int MapSizeX;

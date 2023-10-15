@@ -61,6 +61,7 @@ Material:
     - _Nadir_Blend_Power: 0.27
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _TimeOfDay: 0.99
     - _Zenith_Blend_Power: 0.21
     m_Colors:
     - _Horizon_Color: {r: 1.34, g: 1.39, b: 1.55, a: 0}
