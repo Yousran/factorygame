@@ -14,7 +14,7 @@ public class PortGen : MonoBehaviour
 
     public void SpawnPort(int BesarX, int BesarZ)
     {
-        Vector3 posisi = new Vector3(transform.position.x + BesarX /2, transform.position.y + 0.09f, transform.position.z + BesarZ + 10);
+        Vector3 posisi = new Vector3(transform.position.x + BesarX /2, transform.position.y + 0.9f, transform.position.z + BesarZ + 10);
         GameObject SpawnedPort = Instantiate(port, posisi, Quaternion.identity);
         Ray ray = new Ray(SpawnedPort.transform.position, Vector3.back);
         RaycastHit hit;

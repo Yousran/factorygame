@@ -8,13 +8,13 @@ public class MapGen : MonoBehaviour
     public string Seed;
     public bool RandomSeed = true;
 
-    public static int SizeX = 500;
+    public static int SizeX = 1000;
 
     public static int SizeY = 100;
 
-    public static int SizeZ = 500;
+    public static int SizeZ = 1000;
 
-    public static int _ChunkSize = 10;
+    public static int _ChunkSize = 100;
     public int ChunkSize { get; set; } = _ChunkSize;
 
     public Trees[] TreeToSpawn;

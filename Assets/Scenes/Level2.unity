@@ -152,6 +152,14 @@ PrefabInstance:
       value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560789290205041180, guid: 85a62891344c9ed4588de3ccda2abb0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 300
       objectReference: {fileID: 0}
