@@ -17,12 +17,12 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.71132076, g: 1, b: 0.976694, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.015
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.37805265, g: 0.5304663, b: 0.6320754, a: 1}
-  m_AmbientGroundColor: {r: 0, g: 0.10308754, b: 0.3962264, a: 1}
+  m_AmbientSkyColor: {r: 0.5270025, g: 0.635191, b: 0.6698113, a: 1}
+  m_AmbientEquatorColor: {r: 0.25500178, g: 0.2572516, b: 0.3584906, a: 1}
+  m_AmbientGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientIntensity: 0.2
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SunLight: {fileID: 1924815075}
   skyboxMaterial: {fileID: 2100000, guid: dda853610e076dc4797c179305d919b2, type: 2}
-  rotationSpeed: 1
+  rotationSpeed: 0.3
   SkyboxLerpValue: 0
   currentRotation: 0
 --- !u!1001 &1831851214
@@ -310,7 +310,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.6
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.1

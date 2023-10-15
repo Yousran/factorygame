@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
@@ -27,18 +28,21 @@ public class SunCycle : MonoBehaviour
         // Rotate the light continuously based on the currentRotation
         SunLight.transform.rotation = Quaternion.Euler(currentRotation, 0, 0);
 
-        if (currentRotation <= 20)
+        if (currentRotation <= 5)
         {
-            SkyboxLerpValue = currentRotation / 20;
+            SkyboxLerpValue = currentRotation / 5;
         }
-        else if (currentRotation >= 155)
+        else if (currentRotation >= 160)
         {
-            SkyboxLerpValue = (20 - (currentRotation - 155)) / 20;
+            SkyboxLerpValue = (5 - (currentRotation - 160)) / 5;
         }
 
 
         // Set the Skybox material's "TimeOfDay" property
         skyboxMaterial.SetFloat("_TimeOfDay", SkyboxLerpValue);
+
+        UnityEngine.RenderSettings.fogColor = Color.Lerp(Color.black, new Color32(181, 255, 249, 255), SkyboxLerpValue);
+
         //Debug.Log(skyboxMaterial.GetFloat("TimeOfDay"));
 
         if (currentRotation > 180)
