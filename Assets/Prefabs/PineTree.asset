@@ -20,7 +20,7 @@ MonoBehaviour:
   MaxVerticalSpawnRate: 1
   MinVerticalSpawnRate: 0.3
   PrefabKayu:
-  - {fileID: 3181916495347918271, guid: c95646f11c8203b438f9c638247c3121, type: 3}
+  - {fileID: 3181916495347918271, guid: 7e49da09c0e5df24abd69e193aeb51f3, type: 3}
   - {fileID: 3332423901443081815, guid: 7ce90e6022f16b043b64755895a3dfee, type: 3}
   MinWoodSpawn: 1
   MaxWoodSpawn: 4

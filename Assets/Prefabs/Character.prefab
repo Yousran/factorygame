@@ -207,8 +207,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 2
+  MaxRayDistance: 3
   cam: {fileID: 0}
+  ObjDrag: {fileID: 0}
+  UITree: {fileID: 0}
   Map: {fileID: 0}
+  HoldingPoint: {fileID: 0}
 --- !u!20 &5651525014971985411
 Camera:
   m_ObjectHideFlags: 0

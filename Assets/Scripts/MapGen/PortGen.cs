@@ -14,7 +14,6 @@ public class PortGen : MonoBehaviour
 
     public void SpawnPort(int BesarX, int BesarZ)
     {
-        UnityEngine.Debug.Log(transform.position);
         Vector3 posisi = new Vector3(transform.position.x + BesarX /2, transform.position.y + 1.51f, transform.position.z + BesarZ + 10);
         GameObject SpawnedPort = Instantiate(port, posisi, Quaternion.identity);
         Ray ray = new Ray(SpawnedPort.transform.position, Vector3.back);
