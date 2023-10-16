@@ -12,6 +12,7 @@ public class CharacterMovement : MonoBehaviour
     public float raycastDistance = 1f;
     public float maxSlopeAngle = 45.0f; // Sesuaikan dengan sudut yang Anda inginkan
     public LayerMask mask;
+    public bool ChunkRendererActive;
     public float SphereRadius;
     RaycastHit hit;
 
@@ -20,7 +21,7 @@ public class CharacterMovement : MonoBehaviour
     // Chunk yang overlapp dengan sphere 
     private HashSet<GameObject> objectsInSphere = new HashSet<GameObject>();
     private Vector3 moveDirection;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -68,8 +69,10 @@ public class CharacterMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce/10, ForceMode.Impulse);
         }
-
-        ChunkRenderer();
+        if (ChunkRendererActive)
+        {
+            ChunkRenderer();
+        }
 
     }
     bool IsGrounded()

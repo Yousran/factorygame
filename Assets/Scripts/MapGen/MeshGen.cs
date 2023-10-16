@@ -17,6 +17,7 @@ public class MeshGen
     public static int ChunkSizeX = MapGen.SizeX / MapGen._ChunkSize;
     public static int ChunkSizeY = MapGen.SizeY;
     public static int ChunkSizeZ = MapGen.SizeZ / MapGen._ChunkSize;
+    public bool MeshRendererActive = true;
     Vector3Int ChunkPosition;
 
     float[,,] MapData = IslandGen.DataMap;
@@ -56,7 +57,7 @@ public class MeshGen
         BuatMeshData(_Position);
         BuildMesh();
 
-        ChunkObject.GetComponent<MeshRenderer>().enabled = false;
+        ChunkObject.GetComponent<MeshRenderer>().enabled = MeshRendererActive;
     }
 
     int GetCubeConfig(float[] cube)

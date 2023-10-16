@@ -20,6 +20,9 @@ Procedurally generated island using seeded perlin noise and fallout map <br>
 Mesh generated using marching cubes algorithm <br>
 <img width = "400" src="./Project Documentation/island top.png" />
 
+Day and night cycle using real world star texture <br>
+<img width = "400" src="./Project Documentation/night sky.png" />
+
 
 ### Overview
 
