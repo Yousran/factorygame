@@ -1151,7 +1151,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_Distance_Fade",
     "m_StageCapability": 2,
-    "m_Value": 0.699999988079071,
+    "m_Value": 2.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -2999,7 +2999,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_RotateSpeed",
     "m_StageCapability": 2,
-    "m_Value": 0.009999999776482582,
+    "m_Value": 0.029999999329447748,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -3666,7 +3666,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_BlendMode": 15
+    "m_BlendMode": 17
 }
 
 {

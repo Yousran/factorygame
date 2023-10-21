@@ -12,13 +12,14 @@ public class SunCycle : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float SkyboxLerpValue = 0f;
     public float currentRotation = 0.0f;
+    public Light light;
 
     void Start()
     {
         // Duplicate the assigned Skybox material to ensure it's a separate instance
         skyboxMaterial = new Material(skyboxMaterial);
         UnityEngine.RenderSettings.skybox = skyboxMaterial;
-
+        light = SunLight.GetComponent<Light>();
         // Start your rotation coroutine
         StartCoroutine(RotateSun());
     }
@@ -47,11 +48,15 @@ public class SunCycle : MonoBehaviour
 
         if (currentRotation > 180)
         {
-            SunLight.SetActive(false);
+            light.color = Color.black;
+            currentRotation = 0;
+            
+            //SunLight.SetActive(false);
         }
         else
         {
-            SunLight.SetActive(true);
+            light.color = Color.white;
+            //    SunLight.SetActive(true);
         }
     }
 
