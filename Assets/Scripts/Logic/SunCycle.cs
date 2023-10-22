@@ -27,15 +27,17 @@ public class SunCycle : MonoBehaviour
     void Update()
     {
         // Rotate the light continuously based on the currentRotation
-        SunLight.transform.rotation = Quaternion.Euler(currentRotation, 0, 0);
+        
 
         if (currentRotation <= 5)
         {
             SkyboxLerpValue = currentRotation / 5;
+            light.color = Color.Lerp(new Color32(10, 10, 10, 255), Color.white, SkyboxLerpValue);
         }
-        else if (currentRotation >= 160)
+        else if (currentRotation >= 180)
         {
-            SkyboxLerpValue = Mathf.Clamp((5 - (currentRotation - 160)) / 5,0f,1f);
+            SkyboxLerpValue = Mathf.Clamp((5 - (currentRotation - 180)) / 5,0f,1f);
+            light.color = Color.Lerp(new Color32(10, 10, 10, 255), Color.white, SkyboxLerpValue);
         }
 
 
@@ -48,14 +50,14 @@ public class SunCycle : MonoBehaviour
 
         if (currentRotation > 180)
         {
-            light.color = Color.black;
-            currentRotation = 0;
-            
+            //light.color = new Color32(10, 10, 10, 255);
+            SunLight.transform.rotation = Quaternion.Euler(currentRotation-180, 0, 0);
             //SunLight.SetActive(false);
         }
         else
         {
-            light.color = Color.white;
+            //light.color = Color.white;
+            SunLight.transform.rotation = Quaternion.Euler(currentRotation, 0, 0);
             //    SunLight.SetActive(true);
         }
     }
