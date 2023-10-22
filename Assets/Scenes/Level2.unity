@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SunLight: {fileID: 1924815075}
   skyboxMaterial: {fileID: 2100000, guid: dda853610e076dc4797c179305d919b2, type: 2}
-  rotationSpeed: 1
+  rotationSpeed: 5
   SkyboxLerpValue: 0
   currentRotation: 0
   light: {fileID: 0}
