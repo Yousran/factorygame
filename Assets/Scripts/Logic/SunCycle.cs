@@ -12,14 +12,14 @@ public class SunCycle : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float SkyboxLerpValue = 0f;
     public float currentRotation = 0.0f;
-    public Light light;
+    public Light lightobj;
 
     void Start()
     {
         // Duplicate the assigned Skybox material to ensure it's a separate instance
         skyboxMaterial = new Material(skyboxMaterial);
         UnityEngine.RenderSettings.skybox = skyboxMaterial;
-        light = SunLight.GetComponent<Light>();
+        lightobj = SunLight.GetComponent<Light>();
         // Start your rotation coroutine
         StartCoroutine(RotateSun());
     }
@@ -32,12 +32,12 @@ public class SunCycle : MonoBehaviour
         if (currentRotation <= 5)
         {
             SkyboxLerpValue = currentRotation / 5;
-            light.color = Color.Lerp(new Color32(10, 10, 10, 255), Color.white, SkyboxLerpValue);
+            lightobj.color = Color.Lerp(new Color32(10, 10, 10, 255), Color.white, SkyboxLerpValue);
         }
         else if (currentRotation >= 180)
         {
             SkyboxLerpValue = Mathf.Clamp((5 - (currentRotation - 180)) / 5,0f,1f);
-            light.color = Color.Lerp(new Color32(10, 10, 10, 255), Color.white, SkyboxLerpValue);
+            lightobj.color = Color.Lerp(new Color32(10, 10, 10, 255), Color.white, SkyboxLerpValue);
         }
 
 

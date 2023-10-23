@@ -20,8 +20,7 @@ public class PortGen : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            UnityEngine.Debug.Log(ray.ToString());
-            SpawnedPort.transform.position = new Vector3(hit.point.x, SpawnedPort.transform.position.y, hit.point.z +3);
+            SpawnedPort.transform.position = new Vector3(hit.point.x, SpawnedPort.transform.position.y, hit.point.z);
 
             // Mengatur rotasi GameObject sesuai dengan normal permukaan
             SpawnedPort.transform.rotation = Quaternion.FromToRotation(Vector3.right, new Vector3(hit.normal.z, 0f, -hit.normal.x));

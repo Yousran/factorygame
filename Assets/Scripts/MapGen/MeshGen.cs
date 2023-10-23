@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 using Unity.Jobs;
 using Unity.Collections;
@@ -17,7 +16,7 @@ public class MeshGen
     public static int ChunkSizeX = MapGen.SizeX / MapGen._ChunkSize;
     public static int ChunkSizeY = MapGen.SizeY;
     public static int ChunkSizeZ = MapGen.SizeZ / MapGen._ChunkSize;
-    public bool MeshRendererActive = true;
+    public bool MeshRendererActive = false;
     Vector3Int ChunkPosition;
 
     float[,,] MapData = IslandGen.DataMap;

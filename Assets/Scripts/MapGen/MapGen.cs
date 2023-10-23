@@ -8,13 +8,13 @@ public class MapGen : MonoBehaviour
     public string Seed;
     public bool RandomSeed = true;
 
-    public static int SizeX = 200;
+    public static int SizeX = 1000;
 
     public static int SizeY = 100;
 
-    public static int SizeZ = 200;
+    public static int SizeZ = 1000;
 
-    public static int _ChunkSize = 10;
+    public static int _ChunkSize = 100;
     public int ChunkSize { get; set; } = _ChunkSize;
 
     public Trees[] TreeToSpawn;
@@ -32,11 +32,18 @@ public class MapGen : MonoBehaviour
             IslandGen.Seed = Seed;
         }
         //generate island mesh and chunk
+        Debug.Log("Generating Noise");
         IslandGen.IslandData();
-        GenerateChunk();
+        Debug.Log("Finished Generating Noise");
 
+        Debug.Log("Generating Mesh");
+        GenerateChunk();
+        Debug.Log("Finished Generating Mesh");
+
+        Debug.Log("Generating Trees");
         GenerateTrees();
-        
+        Debug.Log("Finished Generating Trees");
+
         PortGen portGenerator = GetComponent<PortGen>();
         portGenerator.SpawnPort(SizeX * (int)transform.localScale.x, SizeZ * (int)transform.localScale.z);
     }
@@ -87,7 +94,6 @@ public class MapGen : MonoBehaviour
                 Chunks[Chunkpos].ChunkObject.transform.SetParent(transform.GetChild(0));
             }
         }
-        Debug.Log("Map Loaded!");
     }
 
     public MeshGen GetChunkFromV3(Vector3 pos)

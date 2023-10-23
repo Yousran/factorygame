@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
     public float raycastDistance = 1f;
     public float maxSlopeAngle = 45.0f; // Sesuaikan dengan sudut yang Anda inginkan
     public LayerMask mask;
-    public bool ChunkRendererActive;
+    public bool ChunkRendererActive = true;
     public float SphereRadius;
     RaycastHit hit;
 

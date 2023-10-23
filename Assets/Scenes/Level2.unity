@@ -145,7 +145,7 @@ MonoBehaviour:
   rotationSpeed: 5
   SkyboxLerpValue: 0
   currentRotation: 0
-  light: {fileID: 0}
+  lightobj: {fileID: 0}
 --- !u!1001 &1831851214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -398,6 +398,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 321252596978669959, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
+      propertyPath: port
+      value: 
+      objectReference: {fileID: 1765060900907226708, guid: efe4b60a82e92fa4480147965da11b08, type: 3}
     - target: {fileID: 321252596978669959, guid: d400cc87a8872fd43bb16fccac667482, type: 3}
       propertyPath: Player
       value: 

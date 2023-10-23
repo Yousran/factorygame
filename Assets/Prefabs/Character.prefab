@@ -58,7 +58,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
-  ChunkRendererActive: 0
+  ChunkRendererActive: 1
   SphereRadius: 60
 --- !u!33 &8609367601768885202
 MeshFilter:
